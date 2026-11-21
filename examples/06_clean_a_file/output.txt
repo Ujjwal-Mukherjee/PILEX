@@ -1,0 +1,7 @@
+Loaded 40 rows and 7 columns from marks.csv.
+Filled 2 gaps in study_hours with the average (5.56).
+Removed 1 row where score is far from the rest (999).
+No column is more than 50% empty.
+Removed the column year: it is the same on every row.
+No row appears twice.
+Saved 39 rows and 6 columns to marks_clean.csv.

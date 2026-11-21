@@ -1,0 +1,2 @@
+Removed 1 value that is far from the rest: 999.
+7 numbers. Smallest 48, biggest 62, average 56.3, middle value 56.

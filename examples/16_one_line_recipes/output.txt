@@ -1,0 +1,53 @@
+Loaded 40 rows and 7 columns from marks.csv.
+Step 1: look at the table.
+marks: 40 rows and 7 columns.
+     column    kind  missing smallest biggest average
+      class   words        0                         
+       year numbers        0     2025    2025    2025
+study_hours numbers        2        1     9.5    5.56
+sleep_hours numbers        0      4.5     8.8    6.63
+ attendance numbers        0       64     100   84.12
+      score numbers        0       23     999   80.15
+     result   words        0                         
+Step 2: clean a copy of the table. Your table is not changed.
+Filled 2 gaps in study_hours with the average (5.56).
+Removed 1 row where score is far from the rest (999).
+Removed the column year: it is the same on every row.
+Cleaned marks: 40 rows and 7 columns became 39 rows and 6 columns.
+Step 3: the shape of each number column.
+Drawing a histogram of study_hours.
+Chart saved as charts/chart_1.png.
+Drawing a histogram of sleep_hours.
+Chart saved as charts/chart_2.png.
+Drawing a histogram of attendance.
+Chart saved as charts/chart_3.png.
+Drawing a histogram of score.
+Chart saved as charts/chart_4.png.
+Step 4: the links between the number columns.
+Drawing the links between the number columns.
+Chart saved as charts/chart_5.png.
+Step 1: clean a copy of the table. Your table is not changed.
+Filled 2 gaps in study_hours with the average (5.56).
+Removed 1 row where score is far from the rest (999).
+Removed the column year: it is the same on every row.
+Cleaned marks: 40 rows and 7 columns became 39 rows and 6 columns.
+Step 2: choose the inputs.
+Inputs used: class, study_hours, sleep_hours, attendance, result. Look for one that gives the answer away.
+Step 3: teach a straight line and a random forest, and keep the better one.
+The answer "score" is a number with many different values, so I guess a number.
+Turned the words in class into number columns of 1 and 0: class_A, class_B, class_C.
+Turned the words in result into number columns of 1 and 0: result_fail, result_pass.
+Taught a straight line on 31 rows and tested it on 8 others.
+Taught a random forest on 31 rows and tested it on 8 others.
+Tried a straight line (share explained 66%) and a random forest (share explained 73%). Kept the random forest.
+Step 4: how good is the model?
+On average the guess for score is off by 4.22.
+The model explains 73% of the ups and downs in score.
+Step 5: what matters most.
+Ranked 5 columns for guessing score: result matters most. A high share means the guesses lean on that column, not that it causes the answer.
+     column  share (%)
+     result         56
+study_hours         32
+ attendance          5
+      class          4
+sleep_hours          3

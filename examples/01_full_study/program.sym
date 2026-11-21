@@ -1,0 +1,17 @@
+marks ← ↓ "marks.csv"
+^ marks, 3
+μσ marks
+marks ← ∅ marks, "study_hours", ½
+marks ← ✂ marks, "score"
+marks ← ▯ marks
+marks ← ▮ marks
+marks ← ≡ marks
+█ marks, "score", 8, "Class marks"
+◔ marks, "result", "Pass and fail"
+▦ marks, "Links between columns"
+╱ marks, "study_hours", "score", "Study and marks"
+ρ marks, "study_hours", "score"
+inputs ← ["study_hours", "sleep_hours"]
+m ← θ marks, inputs, "score", ╱
+✓ m
+ŷ m, [6, 7]

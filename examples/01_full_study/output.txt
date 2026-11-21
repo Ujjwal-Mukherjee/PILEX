@@ -1,0 +1,34 @@
+Loaded 40 rows and 7 columns from marks.csv.
+The first 3 of 40 rows of marks:
+  class  year study_hours sleep_hours  attendance  score result
+0     A  2025         8.4         5.9          91     77   pass
+1     B  2025         6.3         6.6          93     60   pass
+2     C  2025         7.9         7.9          97     74   pass
+marks: 40 rows and 7 columns.
+     column    kind  missing smallest biggest average
+      class   words        0                         
+       year numbers        0     2025    2025    2025
+study_hours numbers        2        1     9.5    5.56
+sleep_hours numbers        0      4.5     8.8    6.63
+ attendance numbers        0       64     100   84.12
+      score numbers        0       23     999   80.15
+     result   words        0                         
+Filled 2 gaps in study_hours with the middle value (5.95).
+Removed 1 row where score is far from the rest (999).
+No column is more than 50% empty.
+Removed the column year: it is the same on every row.
+No row appears twice.
+Drawing a histogram of score in 8 bars.
+Chart saved as charts/chart_1.png.
+Drawing a pie chart of result.
+Chart saved as charts/chart_2.png.
+Drawing the links between the number columns of marks.
+Chart saved as charts/chart_3.png.
+Drawing the dots of study_hours and score, with the line that fits them best.
+Chart saved as charts/chart_4.png.
+study_hours and score: link 0.84, a strong upward link. When study_hours is higher, score tends to be higher. A link does not prove that one causes the other.
+The answer "score" is a number with many different values, so I guess a number.
+Taught a straight line on 31 rows and tested it on 8 others.
+On average the guess for score is off by 2.83.
+The model explains 89% of the ups and downs in score.
+For study_hours 6 and sleep_hours 7 the guess is 59.8.

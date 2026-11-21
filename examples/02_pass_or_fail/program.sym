@@ -1,0 +1,12 @@
+marks ← ↓ "marks.csv"
+marks ← ✨ marks
+inputs ← ["study_hours", "sleep_hours", "attendance"]
+⇅ marks, inputs, "score"
+m ← θ marks, inputs, "result", ⋔⋔, ∈
+✓ m
+✓✗ m
+ŷ m, [7, 6, 90]
+⊟ marks, "class", "score", "Marks by class"
+groups ← κ marks, ["study_hours", "sleep_hours", "score"], 3
+μ groups, "group", ["study_hours", "sleep_hours", "score"]
+• groups, "study_hours", "score", "group"

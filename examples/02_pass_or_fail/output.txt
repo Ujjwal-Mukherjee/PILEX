@@ -1,0 +1,33 @@
+Loaded 40 rows and 7 columns from marks.csv.
+Filled 2 gaps in study_hours with the average (5.56).
+Removed 1 row where score is far from the rest (999).
+Removed the column year: it is the same on every row.
+Cleaned marks: 40 rows and 7 columns became 39 rows and 6 columns.
+The answer "score" is a number with many different values, so I guess a number.
+Ranked 3 columns for guessing score: study_hours matters most. A high share means the guesses lean on that column, not that it causes the answer.
+     column  share (%)
+study_hours         69
+ attendance         25
+sleep_hours          6
+The answer "result" holds words, so I guess a class: fail or pass.
+Taught a random forest on 31 rows and tested it on 8 others.
+It was right for 8 of 8.
+When it said fail, it was right 2 times out of 2.
+Of the rows that really were fail, it found 2 out of 2.
+When it said pass, it was right 6 times out of 6.
+Of the rows that really were pass, it found 6 out of 6.
+Each row is what the test rows really were, and each column is what the model said. The right guesses are in the diagonal.
+           Said fail  Said pass
+Real fail          2          0
+Real pass          0          6
+For study_hours 7, sleep_hours 6 and attendance 90 the guess is pass.
+Drawing box plots of score for each class.
+Chart saved as charts/chart_1.png.
+Sorted 39 rows into 3 groups, numbered from the lowest study_hours to the highest.
+Grouped groups by group: 3 groups, the highest average study_hours first.
+ group  rows average study_hours average sleep_hours average score
+     3    16                7.59                6.51          71.5
+     2    15                4.91                7.27         52.07
+     1     8                2.56                5.44         35.25
+Drawing dots of study_hours and score.
+Chart saved as charts/chart_2.png.

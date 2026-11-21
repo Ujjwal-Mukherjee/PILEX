@@ -1,0 +1,3 @@
+marks ← ↓ "marks_clean.csv"
+╱ marks, "study_hours", "score", "Study and marks"
+ρ marks, "study_hours", "score"

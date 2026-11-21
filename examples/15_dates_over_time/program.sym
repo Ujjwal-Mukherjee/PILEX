@@ -1,0 +1,4 @@
+sales ← ↓ "sales.csv"
+sales ← ⌚ sales, "date", "d/m/y"
+months ← Σ sales, "date", "amount"
+~ months, "month", "total", "Sales by month"

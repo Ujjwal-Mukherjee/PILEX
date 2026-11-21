@@ -1,0 +1,5 @@
+marks ← ↓ "marks_clean.csv"
+columns ← ["study_hours", "sleep_hours", "score"]
+marks ← κ marks, columns, 3
+μ marks, "group", columns
+• marks, "study_hours", "score", "group"

@@ -1,0 +1,3 @@
+marks ← ↓ "marks_clean.csv"
+μ marks, "class", "score"
+⊟ marks, "class", "score", "Marks by class"

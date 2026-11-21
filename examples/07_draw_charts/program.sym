@@ -1,0 +1,4 @@
+marks ← ↓ "marks_clean.csv"
+█ marks, "score", 8, "Class marks"
+◔ marks, "result", "Pass and fail"
+▦ marks, "Links between columns"

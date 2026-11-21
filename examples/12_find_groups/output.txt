@@ -1,0 +1,9 @@
+Loaded 39 rows and 6 columns from marks_clean.csv.
+Sorted 39 rows into 3 groups, numbered from the lowest study_hours to the highest.
+Grouped marks by group: 3 groups, the highest average study_hours first.
+ group  rows average study_hours average sleep_hours average score
+     3    16                7.59                6.51          71.5
+     2    15                4.91                7.27         52.07
+     1     8                2.56                5.44         35.25
+Drawing dots of study_hours and score.
+Chart saved as charts/chart_1.png.

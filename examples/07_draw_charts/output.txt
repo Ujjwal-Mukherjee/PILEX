@@ -1,0 +1,7 @@
+Loaded 39 rows and 6 columns from marks_clean.csv.
+Drawing a histogram of score in 8 bars.
+Chart saved as charts/chart_1.png.
+Drawing a pie chart of result.
+Chart saved as charts/chart_2.png.
+Drawing the links between the number columns of marks.
+Chart saved as charts/chart_3.png.

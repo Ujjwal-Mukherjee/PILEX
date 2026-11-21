@@ -1,0 +1,20 @@
+Loaded 40 rows and 2 columns from reviews.csv.
+The 10 words used most often in text. Very common words such as the and a are left out.
+         word  count
+     honestly      8
+        place      7
+       lovely      6
+         come      6
+         meal      5
+     friendly      5
+        bland      5
+   overpriced      5
+disappointing      5
+         cold      4
+Taught a text sorter on 32 rows and tested it on 8 others.
+It was right for 7 of 8.
+When it said bad, it was right 3 times out of 3.
+Of the rows that really were bad, it found 3 out of 4.
+When it said good, it was right 4 times out of 5.
+Of the rows that really were good, it found 4 out of 4.
+For "Loved it, will come again" the guess is good.

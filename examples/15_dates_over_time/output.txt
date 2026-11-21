@@ -1,0 +1,5 @@
+Loaded 240 rows and 2 columns from sales.csv.
+Read 240 dates in the column date.
+Added up amount for each month: 12 months, from 2025-01 to 2025-12.
+Drawing a line of total against month.
+Chart saved as charts/chart_1.png.

@@ -1,0 +1,21 @@
+Loaded 240 rows and 2 columns from sales.csv.
+Read 240 dates in the column date.
+Added up amount for each month: 12 months, from 2025-01 to 2025-12.
+Drawing a line of total against month.
+Chart saved as charts/chart_1.png.
+Saved 12 rows and 2 columns to months.csv.
+Loaded 40 rows and 2 columns from reviews.csv.
+The 5 words used most often in text. Very common words such as the and a are left out.
+    word  count
+honestly      8
+   place      7
+  lovely      6
+    come      6
+    meal      5
+Taught a text sorter on 32 rows and tested it on 8 others.
+It was right for 7 of 8.
+When it said bad, it was right 3 times out of 3.
+Of the rows that really were bad, it found 3 out of 4.
+When it said good, it was right 4 times out of 5.
+Of the rows that really were good, it found 4 out of 4.
+For "Cold food and rude staff" the guess is bad.

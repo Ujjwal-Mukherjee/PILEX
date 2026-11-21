@@ -1,0 +1,3 @@
+marks ← ↓ "marks.csv"
+^ marks, 5
+μσ marks

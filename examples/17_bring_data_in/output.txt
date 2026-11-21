@@ -1,0 +1,2 @@
+Loaded 40 rows and 7 columns from marks.csv.
+Made the practice table "marks": 40 rows and 7 columns.

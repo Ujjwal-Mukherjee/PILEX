@@ -1,0 +1,5 @@
+marks ← ↓ "marks_clean.csv"
+inputs ← ["study_hours", "sleep_hours"]
+model ← θ marks, inputs, "score", ╱
+✓ model
+ŷ model, [6, 7]

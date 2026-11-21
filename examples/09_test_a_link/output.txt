@@ -1,0 +1,4 @@
+Loaded 39 rows and 6 columns from marks_clean.csv.
+Drawing the dots of study_hours and score, with the line that fits them best.
+Chart saved as charts/chart_1.png.
+study_hours and score: link 0.85, a strong upward link. When study_hours is higher, score tends to be higher. A link does not prove that one causes the other.

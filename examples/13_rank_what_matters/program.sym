@@ -1,0 +1,3 @@
+marks ← ↓ "marks_clean.csv"
+inputs ← ["study_hours", "sleep_hours", "attendance"]
+⇅ marks, inputs, "score"

@@ -1,0 +1,6 @@
+Loaded 39 rows and 6 columns from marks_clean.csv.
+The answer "score" is a number with many different values, so I guess a number.
+Taught a straight line on 31 rows and tested it on 8 others.
+On average the guess for score is off by 2.81.
+The model explains 89% of the ups and downs in score.
+For study_hours 6 and sleep_hours 7 the guess is 60.1.

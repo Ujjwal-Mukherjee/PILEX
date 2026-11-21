@@ -1,0 +1,5 @@
+reviews ← ↓ "reviews.csv"
+¶▲ reviews, "text", 10
+model ← θ¶ reviews, "text", "label"
+✓ model
+ŷ model, "Loved it, will come again"

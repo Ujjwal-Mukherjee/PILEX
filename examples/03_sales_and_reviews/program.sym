@@ -1,0 +1,11 @@
+sales ← ↓ "sales.csv"
+sales ← ⌚ sales, "date", "d/m/y"
+months ← Σ sales, "date", "amount"
+~ months, "month", "total", "Sales by month"
+↑ months, "months.csv"
+
+reviews ← ↓ "reviews.csv"
+¶▲ reviews, "text", 5
+m ← θ¶ reviews, "text", "label"
+✓ m
+ŷ m, "Cold food and rude staff"

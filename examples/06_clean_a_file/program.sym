@@ -1,0 +1,7 @@
+marks ← ↓ "marks.csv"
+marks ← ∅ marks, "study_hours", μ
+marks ← ✂ marks, "score"
+marks ← ▯ marks
+marks ← ▮ marks
+marks ← ≡ marks
+↑ marks, "marks_clean.csv"

@@ -1,0 +1,12 @@
+Loaded 39 rows and 6 columns from marks_clean.csv.
+The answer "result" holds words, so I guess a class: fail or pass.
+Taught a decision tree on 31 rows and tested it on 8 others.
+It was right for 7 of 8.
+When it said fail, it was right 1 time out of 1.
+Of the rows that really were fail, it found 1 out of 2.
+When it said pass, it was right 6 times out of 7.
+Of the rows that really were pass, it found 6 out of 6.
+Each row is what the test rows really were, and each column is what the model said. The right guesses are in the diagonal.
+           Said fail  Said pass
+Real fail          1          1
+Real pass          0          6

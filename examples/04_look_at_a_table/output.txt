@@ -1,0 +1,17 @@
+Loaded 40 rows and 7 columns from marks.csv.
+The first 5 of 40 rows of marks:
+  class  year study_hours sleep_hours  attendance  score result
+0     A  2025         8.4         5.9          91     77   pass
+1     B  2025         6.3         6.6          93     60   pass
+2     C  2025         7.9         7.9          97     74   pass
+3     A  2025         7.2         7.2          85     77   pass
+4     B  2025           7           8          93     73   pass
+marks: 40 rows and 7 columns.
+     column    kind  missing smallest biggest average
+      class   words        0                         
+       year numbers        0     2025    2025    2025
+study_hours numbers        2        1     9.5    5.56
+sleep_hours numbers        0      4.5     8.8    6.63
+ attendance numbers        0       64     100   84.12
+      score numbers        0       23     999   80.15
+     result   words        0                         

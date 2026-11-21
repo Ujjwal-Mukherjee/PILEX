@@ -1,0 +1,8 @@
+Loaded 39 rows and 6 columns from marks_clean.csv.
+Grouped marks by class: 3 groups, the highest average score first.
+class  rows average score
+    A    14         63.64
+    B    13            62
+    C    12          42.5
+Drawing box plots of score for each class.
+Chart saved as charts/chart_1.png.

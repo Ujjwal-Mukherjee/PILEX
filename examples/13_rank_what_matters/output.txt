@@ -1,0 +1,7 @@
+Loaded 39 rows and 6 columns from marks_clean.csv.
+The answer "score" is a number with many different values, so I guess a number.
+Ranked 3 columns for guessing score: study_hours matters most. A high share means the guesses lean on that column, not that it causes the answer.
+     column  share (%)
+study_hours         69
+ attendance         25
+sleep_hours          6
