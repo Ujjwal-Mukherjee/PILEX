@@ -1,0 +1,17 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+marks = pd.read_csv("marks_clean.csv")
+plt.hist(marks["score"], bins=8)
+plt.title("Class marks")
+plt.show()
+marks["result"].value_counts().plot.pie(autopct="%1.0f%%")
+plt.title("Pass and fail")
+plt.ylabel("")
+plt.show()
+corr = marks.select_dtypes("number").corr()
+plt.imshow(corr, cmap="coolwarm", vmin=-1, vmax=1)
+plt.xticks(range(len(corr)), corr.columns, rotation=90)
+plt.yticks(range(len(corr)), corr.columns)
+plt.colorbar()
+plt.title("Links between columns")
+plt.show()

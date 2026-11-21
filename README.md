@@ -4,6 +4,18 @@ Data-science programs written in symbols, with exactly what they print and draw.
 
 Each example is a program in symbols (`program.sym`) next to what it produced (`output.txt`, and its charts). Every program was run, and the output is what came out. This repository shows the programs and their results; the program that runs the symbols is not part of it.
 
+## Why PILEX
+
+PILEX is a way for an AI to write a program in symbols. A person can read it too, once the symbols are known.
+
+- **AIs will write most programs.** So PILEX is made for the one who writes, an AI, and for the one who checks. It is not made for typing by hand.
+- **A symbol means one thing.** Once an AI has learned the symbols, each one carries its meaning exactly, so there is less to get wrong. This is the bet of PILEX. It has not been measured yet.
+- **A symbol can stand for a whole block of work.** Where a program is made of standard blocks it becomes much shorter (see [Tokens](#tokens)). Where every line is new logic it does not, and it can even cost a little more. More blocks, and bigger blocks, are the way to shorten more programs.
+- **The machinery stays out of sight.** The plan is that the blocks, the engine and the translator all live in a data centre. An AI never reads their code: it writes symbols, sends them, and the answer comes back.
+- **Data science first, then ordinary programs.** Ordinary programs need loops, choices and functions in symbols as well, with the same blocks doing the standard work.
+
+Not shown yet: that symbols make an AI write fewer wrong programs, the data-centre arrangement (today the engine runs in a notebook), and ordinary programs (this repository has data science only). [TOKENS.md](TOKENS.md) says what is measured and what is not.
+
 ## One program
 
 ```
@@ -80,6 +92,18 @@ symbol values            show the result: a table, numbers or a chart
 ```
 
 A symbol is followed by its values, separated by commas: names made earlier, numbers, a list in square brackets, or text in quotes. Column names, titles and file names are your own words, in any language.
+
+## Tokens
+
+An AI pays for every token it writes. The same work in ordinary Python and in PILEX, counted with a public tokenizer (the numbers are approximate; two other tokenizers agree within about 5 percent):
+
+| Kind of program | Programs | Ordinary Python | PILEX | PILEX as a share of ordinary |
+|---|---|---|---|---|
+| Data science, as in this repository | 16 | 3,044 tokens | 872 tokens | 29% |
+| Ordinary programs where standard blocks fit (estimate) | 18 | 3,202 | 2,100 to 2,300 | 66% to 71% |
+| Ordinary programs of new logic (estimate) | 2 | 675 | 650 to 740 | 96% to 110% |
+
+The first row is measured, and it is the best case: the symbols were made for these programs. The other two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. Every program, the ordinary versions and the method are in [TOKENS.md](TOKENS.md).
 
 ## The symbols
 
@@ -160,4 +184,4 @@ A symbol is followed by its values, separated by commas: names made earlier, num
 | 16 | A whole report, and a guess, one line each | `↓` `⚡§` `⚡ŷ` | [program](examples/16_one_line_recipes/program.sym) | [output](examples/16_one_line_recipes/output.txt) |
 | 17 | Two ways to bring data in: a file, or a ready-made practice table | `↓` `✎` | [program](examples/17_bring_data_in/program.sym) | [output](examples/17_bring_data_in/output.txt) |
 
-*Draft 1.*
+*Draft 2.*
