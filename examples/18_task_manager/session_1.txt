@@ -1,0 +1,112 @@
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 2
+There are no tasks yet.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 1
+Title: Buy milk
+Added task 1.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 1
+Title: Write the report
+Added task 2.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 1
+Title: বাংলা পড়া
+Added task 3.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 1
+Title: 
+A task needs a title.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 2
+  1  [ ]  Buy milk
+  2  [ ]  Write the report
+  3  [ ]  বাংলা পড়া
+0 of 3 done
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 3
+Task number: abc
+Please type a whole number above zero.
+Task number: 0
+Please type a whole number above zero.
+Task number: 2
+Marked as done.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 3
+Task number: 9
+There is no task with that number.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 4
+Task number: 1
+Deleted.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 2
+  2  [x]  Write the report
+  3  [ ]  বাংলা পড়া
+1 of 2 done
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 7
+Please choose a number from 1 to 5.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 5
+Goodbye.

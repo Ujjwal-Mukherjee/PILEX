@@ -1,0 +1,9 @@
+2026-11-22 10:07:31 | WARNING  | PriceCheck | shop_a is busy
+2026-11-22 10:07:31 | WARNING  | PriceCheck | shop_a is busy
+2026-11-22 10:07:31 | WARNING  | PriceCheck | shop_b is busy
+2026-11-22 10:07:31 | WARNING  | PriceCheck | shop_b is busy
+sync : shop_b {'shop_a': 120.5, 'shop_b': 99.0} {'shop_a': 3, 'shop_b': 3}
+gave up: shop_c is down
+2026-11-22 10:07:31 | WARNING  | PriceCheck | shop_a did not answer
+2026-11-22 10:07:31 | WARNING  | PriceCheck | shop_b did not answer
+async: ('shop_b', 99.0) {'shop_a': 2, 'shop_b': 2}

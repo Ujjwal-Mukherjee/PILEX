@@ -1,0 +1,37 @@
+import os
+import tempfile
+from dataclasses import field
+from typing import List, Optional
+
+❝ Status, "TODO DOING DONE"
+♯ Priority, "LOW MEDIUM HIGH", start=1
+
+▣ Todo
+    id: str
+    title: str
+    status: Status = Status.TODO
+    priority: Priority = Priority.MEDIUM
+    tags: List[str] = field(default_factory=list)
+    due: Optional[str] = None
+    updated_at: float = 0.0
+
+⛁ TodoStore, Todo, key="id", touch="updated_at", index="status"
+
+path = os.path.join(tempfile.mkdtemp(), "todos.db")
+
+todos = TodoStore(path)
+todos.save(Todo("t1", "Buy milk", tags=["home"]))
+todos.save(Todo("t2", "Write report", Status.DOING, Priority.HIGH, ["work", "urgent"], "2026-12-01"))
+todos.save(Todo("t3", "Call mother", Status.DONE, Priority.LOW))
+todos.close()
+
+todos = TodoStore(path)
+item = todos.get("t1")
+item.status = Status.DONE
+todos.save(item)
+
+for todo in todos.all():
+    print(todo.id, todo.title, todo.status.value, todo.priority.name, todo.tags, todo.due)
+print(todos.count_by("status", Status))
+print(sorted(t.title for t in todos.all() if t.priority >= Priority.MEDIUM))
+todos.close()

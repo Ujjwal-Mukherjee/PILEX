@@ -1,0 +1,31 @@
+2026-11-22 10:07:32 | INFO     | TaskEngine | Starting TaskEngine with 3 workers...
+2026-11-22 10:07:32 | INFO     | TaskEngine | Enqueued job 5881c25a | Task: generate_report | Priority: LOW
+2026-11-22 10:07:32 | INFO     | TaskEngine | Enqueued job 47138c0a | Task: process_payment | Priority: CRITICAL
+2026-11-22 10:07:32 | INFO     | TaskEngine | Enqueued job c6c2029d | Task: heavy_computation | Priority: NORMAL
+2026-11-22 10:07:32 | INFO     | TaskEngine | Enqueued job c1365940 | Task: process_payment | Priority: HIGH
+2026-11-22 10:07:32 | INFO     | TaskEngine | [Worker-1] Executing 47138c0a (process_payment) - Attempt 1/4
+2026-11-22 10:07:32 | INFO     | TaskEngine | [Worker-2] Executing c1365940 (process_payment) - Attempt 1/4
+2026-11-22 10:07:32 | INFO     | TaskEngine | [Worker-3] Executing c6c2029d (heavy_computation) - Attempt 1/2
+2026-11-22 10:07:32 | WARNING  | TaskEngine | [Worker-1] Job 47138c0a failed (ConnectionError: Payment gateway timeout). Retrying in 0.5s...
+2026-11-22 10:07:32 | INFO     | TaskEngine | [Worker-1] Executing 5881c25a (generate_report) - Attempt 1/4
+2026-11-22 10:07:32 | INFO     | TaskEngine | [Worker-2] Completed c1365940 -> Result: {'transaction_id': 'txn_01707e', 'amount': 49.99}
+2026-11-22 10:07:33 | INFO     | TaskEngine | [Worker-2] Executing 47138c0a (process_payment) - Attempt 2/4
+2026-11-22 10:07:33 | WARNING  | TaskEngine | [Worker-3] Job c6c2029d failed (Execution timed out after 1.0s). Retrying in 0.5s...
+2026-11-22 10:07:33 | INFO     | TaskEngine | [Worker-1] Completed 5881c25a -> Result: Report_2026.pdf generated
+2026-11-22 10:07:33 | INFO     | TaskEngine | [Worker-2] Completed 47138c0a -> Result: {'transaction_id': 'txn_6d09d3', 'amount': 250.0}
+2026-11-22 10:07:33 | INFO     | TaskEngine | [Worker-3] Executing c6c2029d (heavy_computation) - Attempt 2/2
+2026-11-22 10:07:34 | ERROR    | TaskEngine | [Worker-3] Job c6c2029d moved to DEAD_LETTER after 2 attempts. Error: Execution timed out after 1.0s
+
+==================================================
+FINAL EXECUTION METRICS
+==================================================
+PENDING        : 0
+RUNNING        : 0
+COMPLETED      : 3
+FAILED         : 0
+RETRYING       : 0
+DEAD_LETTER    : 1
+==================================================
+
+2026-11-22 10:07:34 | INFO     | TaskEngine | Initiating graceful shutdown...
+2026-11-22 10:07:34 | INFO     | TaskEngine | TaskEngine shutdown complete.

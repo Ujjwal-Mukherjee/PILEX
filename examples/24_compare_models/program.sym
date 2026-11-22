@@ -1,0 +1,97 @@
+↧ asyncio, os, tempfile
+⌬
+from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
+
+logger ← ● "Experiments", "WARNING"
+❝ JobStatus, "PENDING RUNNING COMPLETED FAILED RETRYING DEAD_LETTER"
+♯ JobPriority, "CRITICAL HIGH NORMAL LOW"
+❝ Quality, "GOOD FAIR POOR"
+⛭ Experiments, Job, workers=2, backoff=0.05
+⛁ JobStore, Job, key="job_id", touch="updated_at", index="status"
+
+▣ Score
+    model: str
+    quality: Quality
+    r2: float
+    updated_at: float = 0.0
+
+⛁ ScoreStore, Score, key="model", touch="updated_at", index="quality"
+
+rng = np.random.default_rng(11)
+n = 240
+shop = pd.DataFrame({
+    "price": rng.normal(20, 3, n).round(2),
+    "ads": rng.integers(0, 30, n),
+    "temp": rng.normal(25, 6, n).round(1),
+    "weekend": rng.integers(0, 2, n),
+})
+shop["units"] = (60 + 2.5 * shop["ads"] - 3 * shop["price"] + 0.8 * shop["temp"] + 12 * shop["weekend"] + 0.06 * shop["ads"] * shop["temp"] + rng.normal(0, 4, n)).round(0)
+
+MODELS = {
+    "straight line": lambda: LinearRegression(),
+    "ridge": lambda: Ridge(alpha=30.0),
+    "small tree": lambda: DecisionTreeRegressor(max_depth=4, random_state=0),
+    "forest": lambda: RandomForestRegressor(n_estimators=60, random_state=0),
+    "forest, 3000 trees": lambda: RandomForestRegressor(n_estimators=3000, random_state=0),
+}
+
+
+async def main():
+    folder = tempfile.mkdtemp()
+    ⤓ os.path.join(folder, "sales.csv"), shop.to_csv(index=False)
+    table ← ⊞ os.path.join(folder, "sales.csv")
+    inputs = table[["ads", "price", "temp", "weekend"]]
+    answers = list(table["units"])
+
+    store = JobStore(os.path.join(folder, "jobs.db"))
+    engine = Experiments(store=store, concurrency=2)
+    tries = {}
+
+    def score_one(name):
+        check ← ✛ MODELS[name](), inputs, answers, 5
+        return check
+
+    @engine.register_task("score_model")
+    async def score_model(payload):
+        name = payload["model"]
+        tries[name] = tries.get(name, 0) + 1
+        if name == "ridge" and tries[name] < 2:
+            raise ConnectionError("the worker was lost")
+        if name == "forest, 3000 trees":
+            await asyncio.sleep(1)
+        check = await asyncio.to_thread(score_one, name)
+        return {"model": name, "r2": check["mean"], "spread": check["std"]}
+
+    await engine.start()
+    plan = [("forest", JobPriority.NORMAL), ("small tree", JobPriority.NORMAL), ("forest, 3000 trees", JobPriority.LOW),
+            ("ridge", JobPriority.HIGH), ("straight line", JobPriority.CRITICAL)]
+    for name, priority in plan:
+        slow = name.endswith("trees")
+        await engine.enqueue("score_model", {"model": name}, priority=priority, max_retries=2, timeout_seconds=0.3 if slow else 60)
+    await engine.wait_until_empty()
+    metrics = store.count_by("status", JobStatus)
+    await engine.stop()
+
+    done = [j for j in engine.jobs.values() if j.status == JobStatus.COMPLETED]
+    ranking = sorted(done, key=lambda j: -j.result["r2"])
+    for j in ranking:
+        print(f"{j.result['model']:<20} r2 {j.result['r2']:.3f} +/- {j.result['spread']:.3f}  tries {j.attempts}")
+    for j in engine.jobs.values():
+        if j.status != JobStatus.COMPLETED:
+            print(f"{j.payload['model']:<20} {j.status}  after {j.attempts} tries: {j.last_error}")
+    print("jobs by status:", metrics)
+
+    scores = ScoreStore(os.path.join(folder, "scores.db"))
+    for j in ranking:
+        r2 = j.result["r2"]
+        quality = Quality.GOOD if r2 >= 0.96 else (Quality.FAIR if r2 >= 0.80 else Quality.POOR)
+        scores.save(Score(j.result["model"], quality, r2))
+    print("models by quality:", scores.count_by("quality", Quality))
+    scores.close()
+
+    importance ← ★ inputs, answers, "numbers"
+    print("best:", ranking[0].result["model"], "| what matters:", {k: round(v, 2) for k, v in importance.items()})
+
+⏼ main

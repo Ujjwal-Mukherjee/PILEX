@@ -1,0 +1,38 @@
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 2
+  2  [x]  Write the report
+  3  [ ]  বাংলা পড়া
+1 of 2 done
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 1
+Title: Call mother
+Added task 4.
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 2
+  2  [x]  Write the report
+  3  [ ]  বাংলা পড়া
+  4  [ ]  Call mother
+1 of 3 done
+
+1  Add a task
+2  Show the tasks
+3  Mark a task as done
+4  Delete a task
+5  Quit
+> 5
+Goodbye.

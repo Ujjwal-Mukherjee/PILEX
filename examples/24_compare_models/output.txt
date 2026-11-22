@@ -1,0 +1,12 @@
+2026-11-22 10:07:38 | WARNING  | Experiments | [Worker-2] Job 36d461e6 failed (ConnectionError: the worker was lost). Retrying in 0.1s...
+2026-11-22 10:07:39 | WARNING  | Experiments | [Worker-1] Job 1802251b failed (Execution timed out after 0.3s). Retrying in 0.1s...
+2026-11-22 10:07:39 | WARNING  | Experiments | [Worker-2] Job 1802251b failed (Execution timed out after 0.3s). Retrying in 0.1s...
+2026-11-22 10:07:39 | ERROR    | Experiments | [Worker-1] Job 1802251b moved to DEAD_LETTER after 3 attempts. Error: Execution timed out after 0.3s
+straight line        r2 0.980 +/- 0.006  tries 1
+ridge                r2 0.975 +/- 0.007  tries 2
+forest               r2 0.950 +/- 0.014  tries 1
+small tree           r2 0.861 +/- 0.031  tries 1
+forest, 3000 trees   DEAD_LETTER  after 3 tries: Execution timed out after 0.3s
+jobs by status: {'PENDING': 0, 'RUNNING': 0, 'COMPLETED': 4, 'FAILED': 0, 'RETRYING': 0, 'DEAD_LETTER': 1}
+models by quality: {'GOOD': 2, 'FAIR': 2, 'POOR': 0}
+best: straight line | what matters: {'ads': 0.87, 'temp': 0.08, 'price': 0.04, 'weekend': 0.01}

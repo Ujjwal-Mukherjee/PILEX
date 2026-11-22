@@ -1,0 +1,5 @@
+t1 Buy milk DONE MEDIUM ['home'] None
+t2 Write report DOING HIGH ['work', 'urgent'] 2026-12-01
+t3 Call mother DONE LOW [] None
+{'TODO': 0, 'DOING': 1, 'DONE': 2}
+['Buy milk', 'Write report']

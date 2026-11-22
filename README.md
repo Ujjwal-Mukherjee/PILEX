@@ -2,7 +2,7 @@
 
 *Ψ-LEX is written Psi-LEX in plain letters where a symbol cannot go, as in the name of this repository. Say it “sigh-lex”.*
 
-Programs written in symbols, with exactly what they print and draw. The 17 examples here work on data: tables, charts and simple models. Ψ-LEX itself is not for one kind of program. A symbol stands for one block of work, and what it is used for is up to whoever writes the program.
+Programs written in symbols, with exactly what they print and draw. Examples 01 to 17 work on data: tables, charts and simple models. Examples 18 to 24 are other programs: a task manager for the terminal, a to-do list, a price checker, a mail queue, a job engine, a shop report and a comparison of models. Ψ-LEX itself is not for one kind of program. A symbol stands for one block of work, and what it is used for is up to whoever writes the program.
 
 Each example is a program in symbols (`program.sym`) next to what it produced (`output.txt`, and its charts). Every program was run, and the output is what came out. This repository shows the programs and their results; the program that runs the symbols is not part of it.
 
@@ -14,9 +14,9 @@ Each example is a program in symbols (`program.sym`) next to what it produced (`
 - **A symbol means one thing.** Once an AI has learned the symbols, each one carries its meaning exactly, so there is less to get wrong. This is the bet of Ψ-LEX. It has not been measured yet.
 - **A symbol can stand for a whole block of work.** Where a program is made of standard blocks it becomes much shorter (see [Tokens](#tokens)). Where every line is new logic it does not, and it can even cost a little more. More blocks, and bigger blocks, are the way to shorten more programs.
 - **The machinery stays out of sight.** The plan is that the blocks, the engine and the translator all live in a data centre. An AI never reads their code: it writes symbols, sends them, and the answer comes back.
-- **One set of symbols, for any program.** Python is one language, and what you get depends on how you use it; it is the same with the symbols. No symbol is only for one kind of program, and the examples here happen to work on data. Python's own words (loops, choices, functions) have no symbols yet; one will be made when it is needed.
+- **No symbol is only for one kind of program.** Python is one language, and what you get depends on how you use it; it is the same with the symbols. Python's own words (loops, choices, functions) have no symbols yet, so they stay as they are between the lines of signs (see examples 18 to 24); a symbol for one will be made when it is needed.
 
-Not shown yet: that symbols make an AI write fewer wrong programs, the data-centre arrangement (today the engine runs in a notebook), and programs with loops, choices and functions of their own (the 17 examples have none). [TOKENS.md](TOKENS.md) says what is measured and what is not.
+Not shown yet: that symbols make an AI write fewer wrong programs, and the data-centre arrangement (today the engine runs in a notebook). [TOKENS.md](TOKENS.md) says what is measured and what is not.
 
 ## One program
 
@@ -95,6 +95,8 @@ symbol values            show the result: a table, numbers or a chart
 
 A symbol is followed by its values, separated by commas: names made earlier, numbers, a list in square brackets, or text in quotes. Column names, titles and file names are your own words, in any language.
 
+From example 18 on, a program is ordinary Python with lines of signs in it. Python's own lines (`def`, `if`, `for`, `import`, `print`) stay as they are, and a line of signs has the same two forms. Its values can be any Python expression, and a sign can be followed by indented lines, which it then takes as part of its work. The table of symbols below lists the 34 symbols of examples 01 to 17; the signs of examples 18 to 24 are not listed in this repository.
+
 ## Tokens
 
 An AI pays for every token it writes. The same work in ordinary Python and in Ψ-LEX, counted with a public tokenizer (the numbers are approximate; two other tokenizers agree within about 5 percent):
@@ -105,7 +107,7 @@ An AI pays for every token it writes. The same work in ordinary Python and in Ψ
 | Test programs where standard blocks fit (estimate) | 18 | 3,202 | 2,100 to 2,300 | 66% to 71% |
 | Test programs where every line is new logic (estimate) | 2 | 675 | 650 to 740 | 96% to 110% |
 
-The first row is measured, and it is the best case: these programs were written to show the symbols, and almost every line is a block. The other two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. Every program, the ordinary versions and the method are in [TOKENS.md](TOKENS.md).
+The first row is measured, and it is the best case: these programs were written to show the symbols, and almost every line is a block. The other two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. Every program, the ordinary versions and the method are in [TOKENS.md](TOKENS.md). Examples 18 to 24 are not counted in these tables.
 
 ## The symbols
 
@@ -185,5 +187,14 @@ The first row is measured, and it is the best case: these programs were written 
 | 15 | Dates over time: sales for each month, drawn as a line | `↓` `⌚` `Σ` `~` | [program](examples/15_dates_over_time/program.sym) | [output](examples/15_dates_over_time/output.txt) |
 | 16 | A whole report, and a guess, one line each | `↓` `⚡§` `⚡ŷ` | [program](examples/16_one_line_recipes/program.sym) | [output](examples/16_one_line_recipes/output.txt) |
 | 17 | Two ways to bring data in: a file, or a ready-made practice table | `↓` `✎` | [program](examples/17_bring_data_in/program.sym) | [output](examples/17_bring_data_in/output.txt) |
+| 18 | A task manager for the terminal: a menu, a file of tasks that is kept between runs, Bengali titles, a wrong answer asked again | further signs | [program](examples/18_task_manager/program.sym) | [first run](examples/18_task_manager/session_1.txt), [second run](examples/18_task_manager/session_2.txt), [the file it kept](examples/18_task_manager/tasks.json) |
+| 19 | A to-do list kept in a small database, with statuses and priorities | further signs | [program](examples/19_to_do_list/program.sym) | [output](examples/19_to_do_list/output.txt) |
+| 20 | A price checker: two shops that are busy or do not answer, tried again, the cheapest found | further signs | [program](examples/20_price_checker/program.sym) | [output](examples/20_price_checker/output.txt) |
+| 21 | A mail queue with priorities: a mail that needs a second try, one that never arrives, one that is too slow | further signs | [program](examples/21_mail_queue/program.sym) | [output](examples/21_mail_queue/output.txt) |
+| 22 | A job engine: two payments, a report and a heavy sum run by three workers, with tries and a time limit | further signs | [program](examples/22_job_engine/program.sym) | [output](examples/22_job_engine/output.txt) |
+| 23 | A shop report: a download that fails twice, cleaning, a model, two charts, a log and a small database | further signs | [program](examples/23_shop_report/program.sym) | [output](examples/23_shop_report/output.txt), charts [1](examples/23_shop_report/charts/chart_1.png) [2](examples/23_shop_report/charts/chart_2.png) |
+| 24 | Five models tried as jobs, one of them too slow, ranked by how well they guess | further signs | [program](examples/24_compare_models/program.sym) | [output](examples/24_compare_models/output.txt) |
+
+Examples 18 to 24 use further signs, each standing for one block of work as the symbols above do. Those blocks are not described in this repository, so these programs are shown with what they did and nothing more. The screens are real runs: the times and the job numbers in the logs change from run to run (in example 22 a payment may or may not fail on its first try). In example 18 the answers were typed by a script; the screen shows them after the prompts, as a terminal does.
 
 *Draft 2.*

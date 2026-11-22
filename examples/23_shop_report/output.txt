@@ -1,0 +1,15 @@
+2026-11-22 10:07:36 | WARNING  | ShopReport | the shop server is busy
+2026-11-22 10:07:36 | WARNING  | ShopReport | the shop server is busy
+rows: 160  gaps: {'temp': 9}
+after cleaning: 156 rows
+units: {'count': 156, 'min': 12.0, 'max': 119.0, 'mean': 62.6, 'median': 61.5}
+unusual days: 0
+weekday 74 days, mean units 56.0
+weekend 82 days, mean units 68.6
+fit on one split: r2 0.969
+five splits: r2 0.972 +/- 0.009
+what matters: {'ads': 0.79, 'price': 0.11, 'weekend': 0.05, 'temp': 0.05}
+test scores: {'mae': 3.29, 'rmse': 3.96, 'r2': 0.97}
+saved: {'rows': 156, 'r2': 0.969, 'best': 'ads'} | 4 columns ranked
+runs by quality: {'GOOD': 1, 'FAIR': 0, 'POOR': 0}
+files: ['ads.png', 'ranking.csv', 'runs.db', 'sales.csv', 'summary.json', 'units.png']

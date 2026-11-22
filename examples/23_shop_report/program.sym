@@ -1,0 +1,96 @@
+⌬
+↧ os, tempfile
+from dataclasses import field
+from sklearn.linear_model import LinearRegression
+
+logger ← ● "ShopReport", "WARNING"
+❝ Quality, "GOOD FAIR POOR"
+
+▣ Run
+    run_id: str
+    quality: Quality
+    r2: float
+    rmse: float
+    rows: int
+    updated_at: float = 0.0
+
+⛁ RunStore, Run, key="run_id", touch="updated_at", index="quality"
+
+rng = np.random.default_rng(7)
+n = 160
+shop = pd.DataFrame({
+    "price": rng.normal(20, 3, n).round(2),
+    "ads": rng.integers(0, 30, n),
+    "temp": rng.normal(25, 6, n).round(1),
+    "weekend": rng.integers(0, 2, n),
+})
+shop["units"] = (60 + 2.5 * shop["ads"] - 3 * shop["price"] + 0.8 * shop["temp"] + 12 * shop["weekend"] + rng.normal(0, 4, n)).round(0)
+shop.loc[rng.choice(n, 9, replace=False), "temp"] = np.nan
+shop.loc[[5, 77], "price"] = 95.0
+csv_text = shop.to_csv(index=False)
+
+calls = {"server": 0}
+
+
+def fetch_sales():
+    calls["server"] += 1
+    if calls["server"] < 3:
+        logger.warning("the shop server is busy")
+        raise ConnectionError("the shop server is busy")
+    return csv_text
+
+
+def main():
+    folder = tempfile.mkdtemp()
+    path = os.path.join(folder, "sales.csv")
+    ↶ 4, 0.01
+        text = fetch_sales()
+    ⤓ path, text
+
+    table ← ⊞ path
+    info ← ⏿ table
+    print("rows:", info["shape"][0], " gaps:", {k: v for k, v in info["missing"].items() if v})
+    table ← ◌ table, ["temp"], "median"
+    table ← ⌤ table, "price"
+    table = table.reset_index(drop=True)
+    print("after cleaning:", len(table), "rows")
+
+    units = list(table["units"])
+    figures ← ∫ units
+    print("units:", {k: round(v, 1) for k, v in figures.items()})
+    z ← ± units
+    print("unusual days:", sum(1 for v in z if abs(v) > 2.5))
+    rows = table.to_dict("records")
+    by_weekend ← ∐ rows, item["weekend"]
+    for flag, days in by_weekend.items():
+        print("weekend" if flag else "weekday", len(days), "days, mean units", round(sum(d["units"] for d in days) / len(days), 1))
+
+    inputs = table[["price", "ads", "temp", "weekend"]]
+    fit ← ⊢ LinearRegression(), inputs, units
+    check ← ✛ LinearRegression(), inputs, units, 5
+    ranking ← ★ inputs, units, "numbers"
+    parts ← ⧄ inputs, units
+    model = LinearRegression().fit(parts["train_inputs"], parts["train_answers"])
+    scores ← ⊜ parts["test_answers"], model.predict(parts["test_inputs"])
+    print("fit on one split: r2", round(fit["score"], 3))
+    print("five splits: r2", round(check["mean"], 3), "+/-", round(check["std"], 3))
+    print("what matters:", {k: round(v, 2) for k, v in ranking.items()})
+    print("test scores:", {k: round(v, 2) for k, v in scores.items()})
+
+    ▄ units, 12, "Units sold a day", "units", os.path.join(folder, "units.png")
+    ➚ table, "ads", "units", "Units against ad spend", os.path.join(folder, "ads.png")
+    ⎬ os.path.join(folder, "summary.json"), {"rows": len(table), "r2": round(scores["r2"], 3), "best": next(iter(ranking))}
+    ⫎ os.path.join(folder, "ranking.csv"), [["column", "importance"]] + [[k, round(v, 3)] for k, v in ranking.items()]
+    saved ← ⎨ os.path.join(folder, "summary.json")
+    back ← ⫍ os.path.join(folder, "ranking.csv")
+    print("saved:", saved, "|", len(back) - 1, "columns ranked")
+
+    quality = Quality.GOOD if scores["r2"] >= 0.9 else (Quality.FAIR if scores["r2"] >= 0.7 else Quality.POOR)
+    runs = RunStore(os.path.join(folder, "runs.db"))
+    runs.save(Run("run-1", quality, scores["r2"], scores["rmse"], len(table)))
+    print("runs by quality:", runs.count_by("quality", Quality))
+    runs.close()
+    print("files:", sorted(os.listdir(folder)))
+
+
+➤ main

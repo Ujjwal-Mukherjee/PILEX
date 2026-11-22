@@ -1,0 +1,70 @@
+import asyncio
+import time
+import uuid
+from typing import Any, Dict
+
+logger ← ● "TaskEngine"
+❝ JobStatus, "PENDING RUNNING COMPLETED FAILED RETRYING DEAD_LETTER"
+♯ JobPriority, "CRITICAL HIGH NORMAL LOW"
+⛭ TaskEngine
+⛁ JobStore, Job, key="job_id", touch="updated_at", index="status"
+
+
+async def main() -> None:
+    store = JobStore(db_path=":memory:")
+    engine = TaskEngine(store=store, concurrency=3)
+
+    @engine.register_task("process_payment")
+    async def process_payment(payload: Dict[str, Any]) -> Dict[str, Any]:
+        await asyncio.sleep(0.4)
+        if payload.get("simulate_flaky") and time.time() % 2 < 1:
+            raise ConnectionError("Payment gateway timeout")
+        return {
+            "transaction_id": f"txn_{uuid.uuid4().hex[:6]}",
+            "amount": payload["amount"],
+        }
+
+    @engine.register_task("generate_report")
+    async def generate_report(payload: Dict[str, Any]) -> str:
+        await asyncio.sleep(0.8)
+        return f"Report_{payload['year']}.pdf generated"
+
+    @engine.register_task("heavy_computation")
+    async def heavy_computation(payload: Dict[str, Any]) -> int:
+        await asyncio.sleep(payload.get("duration", 0.5))
+        return sum(i * i for i in range(payload.get("n", 1000)))
+
+    await engine.start()
+
+    await engine.enqueue("generate_report", {"year": 2026}, priority=JobPriority.LOW)
+    await engine.enqueue(
+        "process_payment",
+        {"amount": 250.00, "simulate_flaky": True},
+        priority=JobPriority.CRITICAL,
+        max_retries=3,
+    )
+    await engine.enqueue(
+        "heavy_computation",
+        {"n": 5000, "duration": 2.5},
+        priority=JobPriority.NORMAL,
+        timeout_seconds=1.0,
+        max_retries=1,
+    )
+    await engine.enqueue(
+        "process_payment", {"amount": 49.99}, priority=JobPriority.HIGH
+    )
+
+    await engine.wait_until_empty()
+    metrics = store.count_by("status", JobStatus)
+
+    print("\n" + "=" * 50)
+    print("FINAL EXECUTION METRICS")
+    print("=" * 50)
+    for status, count in metrics.items():
+        print(f"{status:<15}: {count}")
+    print("=" * 50 + "\n")
+
+    await engine.stop()
+
+
+⏼ main
