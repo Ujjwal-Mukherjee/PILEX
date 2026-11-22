@@ -6,29 +6,29 @@ logger ← ● "MailQueue", "WARNING"
 tries = {}
 started = []
 
-async def send(payload):
+waiting send(payload):
     address = payload["to"]
     started.append(address)
     tries[address] = tries.get(address, 0) + 1
     if address.startswith("flaky") and tries[address] < 2:
-        raise ConnectionError("mail server busy")
+        error ConnectionError("mail server busy")
     if address.startswith("dead"):
-        raise ConnectionError("mailbox does not exist")
+        error ConnectionError("mailbox does not exist")
     if address.startswith("slow"):
-        await asyncio.sleep(1)
+        wait asyncio.sleep(1)
     return "sent to " + address
 
-async def main():
+waiting main():
     queue = MailQueue()
     queue.register_task("send_mail")(send)
     mails = [("news1@x.com", 3), ("flaky@x.com", 1), ("dead@x.com", 2), ("slow@x.com", 2), ("news2@x.com", 3)]
     for address, priority in mails:
-        await queue.enqueue("send_mail", {"to": address}, priority=priority, max_retries=2, timeout_seconds=0.2)
-    await queue.start()
-    await queue.wait_until_empty()
-    await queue.stop()
-    print("first two started:", started[:2])
+        wait queue.enqueue("send_mail", {"to": address}, priority=priority, max_retries=2, timeout_seconds=0.2)
+    wait queue.start()
+    wait queue.wait_until_empty()
+    wait queue.stop()
+    print "first two started:", started[:2]
     for job in sorted(queue.jobs.values(), key=lambda j: j.payload["to"]):
-        print(job.payload["to"], job.status, job.attempts, job.last_error)
+        print job.payload["to"], job.status, job.attempts, job.last_error
 
 ⏼ main

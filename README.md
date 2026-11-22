@@ -14,7 +14,7 @@ Each example is a program in symbols (`program.sym`) next to what it produced (`
 - **A symbol means one thing.** Once an AI has learned the symbols, each one carries its meaning exactly, so there is less to get wrong. This is the bet of Ψ-LEX. It has not been measured yet.
 - **A symbol can stand for a whole block of work.** Where a program is made of standard blocks it becomes much shorter (see [Tokens](#tokens)). Where every line is new logic it does not, and it can even cost a little more. More blocks, and bigger blocks, are the way to shorten more programs.
 - **The machinery stays out of sight.** The plan is that the blocks, the engine and the translator all live in a data centre. An AI never reads their code: it writes symbols, sends them, and the answer comes back.
-- **No symbol is only for one kind of program.** Python is one language, and what you get depends on how you use it; it is the same with the symbols. Python's own words (loops, choices, functions) have no symbols yet, so they stay as they are between the lines of signs (see examples 18 to 24); a symbol for one will be made when it is needed.
+- **No symbol is only for one kind of program.** Python is one language, and what you get depends on how you use it; it is the same with the symbols. Python's own words (loops, choices, functions) have no symbols yet, so they stay between the lines of signs (see examples 18 to 24), a few kinds of line written the short way (see [Plain lines](#plain-lines)); a symbol for one will be made when it is needed.
 
 Not shown yet: that symbols make an AI write fewer wrong programs, and the data-centre arrangement (today the engine runs in a notebook). [TOKENS.md](TOKENS.md) says what is measured and what is not.
 
@@ -95,7 +95,28 @@ symbol values            show the result: a table, numbers or a chart
 
 A symbol is followed by its values, separated by commas: names made earlier, numbers, a list in square brackets, or text in quotes. Column names, titles and file names are your own words, in any language.
 
-From example 18 on, a program is ordinary Python with lines of signs in it. Python's own lines (`def`, `if`, `for`, `import`, `print`) stay as they are, and a line of signs has the same two forms. Its values can be any Python expression, and a sign can be followed by indented lines, which it then takes as part of its work. The table of symbols below lists the 34 symbols of examples 01 to 17; the signs of examples 18 to 24 are not listed in this repository.
+From example 18 on, a program is Python with lines of signs in it. Python's own lines (`if`, `for`, `return`, `try` and the rest) stay as they are, a few kinds of line can be written the short way (see [Plain lines](#plain-lines)), and a line of signs has the same two forms. Its values can be any Python expression, and a sign can be followed by indented lines, which it then takes as part of its work. The table of symbols below lists the 34 symbols of examples 01 to 17; the signs of examples 18 to 24 are not listed in this repository.
+
+## Plain lines
+
+In examples 18 to 24 some of Python's own lines are written the short way. Ψ-LEX reads each of them as the Python line it stands for, one line for one line. A line written the Python way works as before, and the two can be mixed: a short form is read only where Python itself would not understand the line.
+
+| Written | Stands for |
+|---|---|
+| `show(self, n):` | `def show(self, n):` |
+| `waiting fetch(url) -> dict:` | `async def fetch(url) -> dict:` |
+| `x = wait fetch(url)` | `x = await fetch(url)` |
+| `print total` | `print(total)` |
+| `print "Total: <total, 2 decimals>"` | `print(f"Total: {total:.2f}")` |
+| `error "Not allowed"` | `raise ValueError("Not allowed")` |
+| `error KeyError(key)` | `raise KeyError(key)` |
+| `msg = p"<shop> is busy"` | `msg = f"{shop} is busy"` |
+| `asyncio time uuid` | `import asyncio, time, uuid` |
+| `Any, Dict: typing` | `from typing import Any, Dict` |
+
+In a text, a value between `<` and `>` is filled in, as in an f-string; after the value can come a width (`3 wide`, then `left`, `right` or `middle`) and a number of decimals (`2 decimals`). In a `print` line and an `error` line the texts in double quotes are read this way; anywhere else a text needs the `p` in front of its quote marks. A single module (`import asyncio`) or a single name (`from pathlib import Path`) is written as Python writes it, because Python can read that line itself.
+
+Examples 18 to 24 were first run with these lines written the Python way. Written the short way they are the same programs and read as the same Python, so the outputs shown are what they print.
 
 ## Tokens
 
@@ -104,11 +125,11 @@ An AI pays for every token it writes. The same work in ordinary Python and in Ψ
 | What the blocks stand for | Programs | Ordinary Python | Ψ-LEX | Ψ-LEX as a share of ordinary |
 |---|---|---|---|---|
 | Almost every line is a block: examples 01 to 16 | 16 | 3,044 tokens | 872 tokens | 29% |
-| A mix, from mostly logic to mostly blocks: examples 18 to 22 | 5 | 6,408 | 2,535 | 40% |
+| A mix, from mostly logic to mostly blocks: examples 18 to 22 | 5 | 6,408 | 2,489 | 39% |
 | Test programs where standard blocks fit (estimate) | 18 | 3,202 | 2,100 to 2,300 | 66% to 71% |
 | Test programs where every line is new logic (estimate) | 2 | 675 | 650 to 740 | 96% to 110% |
 
-The first row is measured, and it is the best case: these programs were written to show the symbols, and almost every line is a block. The second row is measured too, and it is a mix. The job engine (example 22) comes out at 19% of its ordinary size and the task manager (example 18) at 92%, because most of the task manager is its own logic. The blocks were found by taking programs apart, these two among them, so this row is not an average over programs. The last two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. The programs, ordinary versions and method of the first row, and the counts of the second, are in [TOKENS.md](TOKENS.md). The ordinary versions of examples 18 to 22 are not shown. Examples 23 and 24 are not counted: no ordinary version of them was written.
+The first row is measured, and it is the best case: these programs were written to show the symbols, and almost every line is a block. The second row is measured too, and it is a mix. The job engine (example 22) comes out at 18% of its ordinary size and the task manager (example 18) at 89%, because most of the task manager is its own logic. The blocks were found by taking programs apart, these two among them, so this row is not an average over programs. The last two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. The programs, ordinary versions and method of the first row, and the counts of the second, are in [TOKENS.md](TOKENS.md). The ordinary versions of examples 18 to 22 are not shown. Examples 23 and 24 are not counted: no ordinary version of them was written.
 
 ## The symbols
 

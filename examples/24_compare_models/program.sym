@@ -1,6 +1,6 @@
 ↧ asyncio, os, tempfile
 ⌬
-from sklearn.linear_model import LinearRegression, Ridge
+LinearRegression, Ridge: sklearn.linear_model
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 
@@ -38,7 +38,7 @@ MODELS = {
 }
 
 
-async def main():
+waiting main():
     folder = tempfile.mkdtemp()
     ⤓ os.path.join(folder, "sales.csv"), shop.to_csv(index=False)
     table ← ⊞ os.path.join(folder, "sales.csv")
@@ -49,49 +49,49 @@ async def main():
     engine = Experiments(store=store, concurrency=2)
     tries = {}
 
-    def score_one(name):
+    score_one(name):
         check ← ✛ MODELS[name](), inputs, answers, 5
         return check
 
     @engine.register_task("score_model")
-    async def score_model(payload):
+    waiting score_model(payload):
         name = payload["model"]
         tries[name] = tries.get(name, 0) + 1
         if name == "ridge" and tries[name] < 2:
-            raise ConnectionError("the worker was lost")
+            error ConnectionError("the worker was lost")
         if name == "forest, 3000 trees":
-            await asyncio.sleep(1)
-        check = await asyncio.to_thread(score_one, name)
+            wait asyncio.sleep(1)
+        check = wait asyncio.to_thread(score_one, name)
         return {"model": name, "r2": check["mean"], "spread": check["std"]}
 
-    await engine.start()
+    wait engine.start()
     plan = [("forest", JobPriority.NORMAL), ("small tree", JobPriority.NORMAL), ("forest, 3000 trees", JobPriority.LOW),
             ("ridge", JobPriority.HIGH), ("straight line", JobPriority.CRITICAL)]
     for name, priority in plan:
         slow = name.endswith("trees")
-        await engine.enqueue("score_model", {"model": name}, priority=priority, max_retries=2, timeout_seconds=0.3 if slow else 60)
-    await engine.wait_until_empty()
+        wait engine.enqueue("score_model", {"model": name}, priority=priority, max_retries=2, timeout_seconds=0.3 if slow else 60)
+    wait engine.wait_until_empty()
     metrics = store.count_by("status", JobStatus)
-    await engine.stop()
+    wait engine.stop()
 
     done = [j for j in engine.jobs.values() if j.status == JobStatus.COMPLETED]
     ranking = sorted(done, key=lambda j: -j.result["r2"])
     for j in ranking:
-        print(f"{j.result['model']:<20} r2 {j.result['r2']:.3f} +/- {j.result['spread']:.3f}  tries {j.attempts}")
+        print "<j.result['model'], 20 wide left> r2 <j.result['r2'], 3 decimals> +/- <j.result['spread'], 3 decimals>  tries <j.attempts>"
     for j in engine.jobs.values():
         if j.status != JobStatus.COMPLETED:
-            print(f"{j.payload['model']:<20} {j.status}  after {j.attempts} tries: {j.last_error}")
-    print("jobs by status:", metrics)
+            print "<j.payload['model'], 20 wide left> <j.status>  after <j.attempts> tries: <j.last_error>"
+    print "jobs by status:", metrics
 
     scores = ScoreStore(os.path.join(folder, "scores.db"))
     for j in ranking:
         r2 = j.result["r2"]
         quality = Quality.GOOD if r2 >= 0.96 else (Quality.FAIR if r2 >= 0.80 else Quality.POOR)
         scores.save(Score(j.result["model"], quality, r2))
-    print("models by quality:", scores.count_by("quality", Quality))
+    print "models by quality:", scores.count_by("quality", Quality)
     scores.close()
 
     importance ← ★ inputs, answers, "numbers"
-    print("best:", ranking[0].result["model"], "| what matters:", {k: round(v, 2) for k, v in importance.items()})
+    print "best:", ranking[0].result["model"], "| what matters:", {k: round(v, 2) for k, v in importance.items()}
 
 ⏼ main

@@ -32,15 +32,15 @@ csv_text = shop.to_csv(index=False)
 calls = {"server": 0}
 
 
-def fetch_sales():
+fetch_sales():
     calls["server"] += 1
     if calls["server"] < 3:
         logger.warning("the shop server is busy")
-        raise ConnectionError("the shop server is busy")
+        error ConnectionError("the shop server is busy")
     return csv_text
 
 
-def main():
+main():
     folder = tempfile.mkdtemp()
     path = os.path.join(folder, "sales.csv")
     ↶ 4, 0.01
@@ -49,21 +49,21 @@ def main():
 
     table ← ⊞ path
     info ← ⏿ table
-    print("rows:", info["shape"][0], " gaps:", {k: v for k, v in info["missing"].items() if v})
+    print "rows:", info["shape"][0], " gaps:", {k: v for k, v in info["missing"].items() if v}
     table ← ◌ table, ["temp"], "median"
     table ← ⌤ table, "price"
     table = table.reset_index(drop=True)
-    print("after cleaning:", len(table), "rows")
+    print "after cleaning:", len(table), "rows"
 
     units = list(table["units"])
     figures ← ∫ units
-    print("units:", {k: round(v, 1) for k, v in figures.items()})
+    print "units:", {k: round(v, 1) for k, v in figures.items()}
     z ← ± units
-    print("unusual days:", sum(1 for v in z if abs(v) > 2.5))
+    print "unusual days:", sum(1 for v in z if abs(v) > 2.5)
     rows = table.to_dict("records")
     by_weekend ← ∐ rows, item["weekend"]
     for flag, days in by_weekend.items():
-        print("weekend" if flag else "weekday", len(days), "days, mean units", round(sum(d["units"] for d in days) / len(days), 1))
+        print "weekend" if flag else "weekday", len(days), "days, mean units", round(sum(d["units"] for d in days) / len(days), 1)
 
     inputs = table[["price", "ads", "temp", "weekend"]]
     fit ← ⊢ LinearRegression(), inputs, units
@@ -72,10 +72,10 @@ def main():
     parts ← ⧄ inputs, units
     model = LinearRegression().fit(parts["train_inputs"], parts["train_answers"])
     scores ← ⊜ parts["test_answers"], model.predict(parts["test_inputs"])
-    print("fit on one split: r2", round(fit["score"], 3))
-    print("five splits: r2", round(check["mean"], 3), "+/-", round(check["std"], 3))
-    print("what matters:", {k: round(v, 2) for k, v in ranking.items()})
-    print("test scores:", {k: round(v, 2) for k, v in scores.items()})
+    print "fit on one split: r2", round(fit["score"], 3)
+    print "five splits: r2", round(check["mean"], 3), "+/-", round(check["std"], 3)
+    print "what matters:", {k: round(v, 2) for k, v in ranking.items()}
+    print "test scores:", {k: round(v, 2) for k, v in scores.items()}
 
     ▄ units, 12, "Units sold a day", "units", os.path.join(folder, "units.png")
     ➚ table, "ads", "units", "Units against ad spend", os.path.join(folder, "ads.png")
@@ -83,14 +83,14 @@ def main():
     ⫎ os.path.join(folder, "ranking.csv"), [["column", "importance"]] + [[k, round(v, 3)] for k, v in ranking.items()]
     saved ← ⎨ os.path.join(folder, "summary.json")
     back ← ⫍ os.path.join(folder, "ranking.csv")
-    print("saved:", saved, "|", len(back) - 1, "columns ranked")
+    print "saved:", saved, "|", len(back) - 1, "columns ranked"
 
     quality = Quality.GOOD if scores["r2"] >= 0.9 else (Quality.FAIR if scores["r2"] >= 0.7 else Quality.POOR)
     runs = RunStore(os.path.join(folder, "runs.db"))
     runs.save(Run("run-1", quality, scores["r2"], scores["rmse"], len(table)))
-    print("runs by quality:", runs.count_by("quality", Quality))
+    print "runs by quality:", runs.count_by("quality", Quality)
     runs.close()
-    print("files:", sorted(os.listdir(folder)))
+    print "files:", sorted(os.listdir(folder))
 
 
 ➤ main

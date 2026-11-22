@@ -1,7 +1,6 @@
-import os
-import tempfile
+os tempfile
 from dataclasses import field
-from typing import List, Optional
+List, Optional: typing
 
 ❝ Status, "TODO DOING DONE"
 ♯ Priority, "LOW MEDIUM HIGH", start=1
@@ -31,7 +30,7 @@ item.status = Status.DONE
 todos.save(item)
 
 for todo in todos.all():
-    print(todo.id, todo.title, todo.status.value, todo.priority.name, todo.tags, todo.due)
-print(todos.count_by("status", Status))
-print(sorted(t.title for t in todos.all() if t.priority >= Priority.MEDIUM))
+    print todo.id, todo.title, todo.status.value, todo.priority.name, todo.tags, todo.due
+print todos.count_by("status", Status)
+print sorted(t.title for t in todos.all() if t.priority >= Priority.MEDIUM)
 todos.close()

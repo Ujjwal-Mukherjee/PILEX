@@ -5,51 +5,51 @@ logger ← ● "PriceCheck"
 PRICES = {"shop_a": 120.5, "shop_b": 99.0}
 calls = {"shop_a": 0, "shop_b": 0}
 
-def fetch_sync(shop):
+fetch_sync(shop):
     calls[shop] += 1
     if calls[shop] < 3:
-        logger.warning(f"{shop} is busy")
-        raise ConnectionError(f"{shop} is busy")
+        logger.warning(p"<shop> is busy")
+        error ConnectionError("<shop> is busy")
     return PRICES[shop]
 
-async def fetch_async(shop):
-    await asyncio.sleep(0.01)
+waiting fetch_async(shop):
+    wait asyncio.sleep(0.01)
     calls[shop] += 1
     if calls[shop] < 2:
-        logger.warning(f"{shop} did not answer")
-        raise TimeoutError(f"{shop} did not answer")
+        logger.warning(p"<shop> did not answer")
+        error TimeoutError("<shop> did not answer")
     return PRICES[shop]
 
-def cheapest_sync(shops):
+cheapest_sync(shops):
     prices = {}
     for shop in shops:
         ↶ 4, 0.01
             prices[shop] = fetch_sync(shop)
     return min(prices, key=prices.get), prices
 
-async def cheapest_async(shops):
-    async def one(shop):
+waiting cheapest_async(shops):
+    waiting one(shop):
         ⎌ 3, 0.01
-            price = await fetch_async(shop)
+            price = wait fetch_async(shop)
         return shop, price
-    results = await asyncio.gather(*(one(shop) for shop in shops))
+    results = wait asyncio.gather(*(one(shop) for shop in shops))
     return min(results, key=lambda r: r[1])
 
-def always_down():
-    raise ConnectionError("shop_c is down")
+always_down():
+    error ConnectionError("shop_c is down")
 
-def blocking_part():
+blocking_part():
     best, prices = cheapest_sync(["shop_a", "shop_b"])
-    print("sync :", best, prices, dict(calls))
+    print "sync :", best, prices, dict(calls)
     try:
         ↶ 3, 0.01
             always_down()
     except ConnectionError as err:
-        print("gave up:", err)
+        print "gave up:", err
 
-async def main():
-    await asyncio.to_thread(blocking_part)
+waiting main():
+    wait asyncio.to_thread(blocking_part)
     calls.update(shop_a=0, shop_b=0)
-    print("async:", await cheapest_async(["shop_a", "shop_b"]), dict(calls))
+    print "async:", wait cheapest_async(["shop_a", "shop_b"]), dict(calls)
 
 ⏼ main

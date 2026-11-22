@@ -1,6 +1,6 @@
 # Tokens: ordinary Python and Ψ-LEX
 
-Made 2026-11-21; the section on examples 18 to 22 was added on 2026-11-22. Draft 2. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
+Made 2026-11-21; the section on examples 18 to 22 was added on 2026-11-22 and counted again later that day, after the programs were written with the short lines of the [README](README.md#plain-lines). Draft 2. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
 
 ## What was counted
 
@@ -79,19 +79,21 @@ The estimate above was made before there were real programs to count. Examples 1
 
 | # | Program | Lines (blank ones too): ordinary > Ψ-LEX | Tokens: ordinary | Tokens: Ψ-LEX | Ψ-LEX as a share of ordinary | Ordinary / Ψ-LEX |
 |---|---|---|---|---|---|---|
-| 18 | Task manager | 149 > 134 | 1,032 | 945 | 92% | 1.09x |
-| 19 | To-do list | 83 > 37 | 674 | 309 | 46% | 2.18x |
-| 20 | Price checker | 83 > 55 | 582 | 411 | 71% | 1.42x |
-| 21 | Mail queue | 146 > 34 | 1,160 | 318 | 27% | 3.65x |
-| 22 | Job engine | 401 > 70 | 2,960 | 552 | 19% | 5.36x |
-| | **Examples 18 to 22** | **862 > 330** | **6,408** | **2,535** | **40%** | **2.53x** |
+| 18 | Task manager | 149 > 134 | 1,032 | 922 | 89% | 1.12x |
+| 19 | To-do list | 83 > 36 | 674 | 304 | 45% | 2.22x |
+| 20 | Price checker | 83 > 55 | 582 | 402 | 69% | 1.45x |
+| 21 | Mail queue | 146 > 34 | 1,160 | 316 | 27% | 3.67x |
+| 22 | Job engine | 401 > 68 | 2,960 | 545 | 18% | 5.43x |
+| | **Examples 18 to 22** | **862 > 327** | **6,408** | **2,489** | **39%** | **2.57x** |
 
-The table is in `o200k`. With `cl100k` the ratios are 1.09, 2.19, 1.40, 3.62, 5.35 and 2.52 times. Taking the docstrings and the blank lines out of both versions changes little: 1.11 times for the task manager, 2.17 for the to-do list, 1.42 for the price checker, 3.65 for the mail queue, 5.24 for the job engine and 2.59 for all five.
+The table is in `o200k`. With `cl100k` the ratios are 1.12, 2.22, 1.43, 3.64, 5.42 and 2.56 times. Taking the docstrings and the blank lines out of both versions changes little: 1.14 times for the task manager, 2.21 for the to-do list, 1.45 for the price checker, 3.67 for the mail queue, 5.42 for the job engine and 2.67 for all five.
+
+These numbers were counted again after the programs were written with the short lines of the [README](README.md#plain-lines). The first count, made when `def`, `print`, `raise` and `import` were written as Python writes them, was 2,535 tokens in Ψ-LEX for the five programs; with the short lines it is 2,489, which is 46 fewer (1.8%). The first count also had one wrong number: the ordinary job engine has no docstrings, only blank lines, so without them it is 2,954 tokens and not 2,895; its ratio was 5.35 and not 5.24, and the five together 2.62 and not 2.59. The numbers above are counted from the files.
 
 What the numbers say:
 
-- **The saving follows how much of the program the blocks stand for.** The task manager is mostly its own logic: the menu, what a task is, what is printed. The signs make it only 9% shorter in tokens, 1.09 times. The job engine is mostly blocks, and it comes out 5.4 times shorter. The other three lie between.
-- **These are not an average over programs.** The blocks were found by taking programs apart: eight of them from the job engine (22) and some from the task manager (18). A program that blocks were taken from is the best case for those blocks, and even so the task manager shrinks by only 9%. Examples 19 to 21 were written afterwards, with blocks that already existed, to see whether the blocks serve other programs too (the mail queue uses the same job-engine blocks as example 22). They show reuse; they are not an average either.
+- **The saving follows how much of the program the blocks stand for.** The task manager is mostly its own logic: the menu, what a task is, what is printed. The signs make it only 11% shorter in tokens, 1.12 times. The job engine is mostly blocks, and it comes out 5.4 times shorter. The other three lie between.
+- **These are not an average over programs.** The blocks were found by taking programs apart: eight of them from the job engine (22) and some from the task manager (18). A program that blocks were taken from is the best case for those blocks, and even so the task manager shrinks by only 11%. Examples 19 to 21 were written afterwards, with blocks that already existed, to see whether the blocks serve other programs too (the mail queue uses the same job-engine blocks as example 22). They show reuse; they are not an average either.
 - **Not counted:** examples 23 and 24, because no ordinary version of them was written, and, as before, whether symbols make an AI write fewer mistakes.
 
 ## What stays out of the AI's sight
