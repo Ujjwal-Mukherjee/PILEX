@@ -113,10 +113,11 @@ In examples 18 to 24 some of Python's own lines are written the short way. Ψ-LE
 | `msg = p"<shop> is busy"` | `msg = f"{shop} is busy"` |
 | `asyncio time uuid` | `import asyncio, time, uuid` |
 | `Any, Dict: typing` | `from typing import Any, Dict` |
+| `sys` (alone, at the top) | `import sys` |
 
-In a text, a value between `<` and `>` is filled in, as in an f-string; after the value can come a width (`3 wide`, then `left`, `right` or `middle`) and a number of decimals (`2 decimals`). In a `print` line and an `error` line the texts in double quotes are read this way; anywhere else a text needs the `p` in front of its quote marks. A single module (`import asyncio`) or a single name (`from pathlib import Path`) is written as Python writes it, because Python can read that line itself.
+In a text, a value between `<` and `>` is filled in, as in an f-string; after the value can come a width (`3 wide`, then `left`, `right` or `middle`) and a number of decimals (`2 decimals`). In a `print` line and an `error` line the texts in double quotes are read this way; anywhere else a text needs the `p` in front of its quote marks. A single name (`from pathlib import Path`) is written as Python writes it, because Python can read that line itself. A single module alone on a line is an import only in the first lines of a program, before the first line that is not an import (examples 20 and 21 begin that way): there Python would stop on the name, because nothing has brought it in, so no working program is read in a new way. Further down it stays a name.
 
-Examples 18 to 24 were first run with these lines written the Python way. Written the short way they are the same programs and read as the same Python, so the outputs shown are what they print.
+Examples 18 to 24 were first run with these lines written the Python way (in examples 23 and 24 the import line was a sign at first; it brings in the same modules). Written the short way they are the same programs and read as the same Python, so the outputs shown are what they print.
 
 ## Tokens
 

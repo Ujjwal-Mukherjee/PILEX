@@ -1,5 +1,5 @@
 ⌬
-↧ os, tempfile
+os tempfile
 from dataclasses import field
 from sklearn.linear_model import LinearRegression
 

@@ -1,4 +1,4 @@
-import asyncio
+asyncio
 
 logger ← ● "MailQueue", "WARNING"
 ⛭ MailQueue, Mail, workers=2, backoff=0.05
