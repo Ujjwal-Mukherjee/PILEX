@@ -1,6 +1,6 @@
 # Tokens: ordinary Python and Ψ-LEX
 
-Made 2026-11-21; the section on examples 18 to 22 was added on 2026-11-22 and counted again later that day, after the programs were written with the short lines of the [README](README.md#plain-lines); the section on example 25 was added on 2026-11-23. Draft 2. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
+Made 2026-11-21; the section on examples 18 to 22 was added on 2026-11-22 and counted again later that day, after the programs were written with the short lines of the [README](README.md#plain-lines); the section on example 25 was added on 2026-11-23, and on the same day the counts of examples 18 and 19 were taken again, after their lines of one name and its module were written the short way. Draft 2. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
 
 ## What was counted
 
@@ -79,16 +79,16 @@ The estimate above was made before there were real programs to count. Examples 1
 
 | # | Program | Lines (blank ones too): ordinary > Ψ-LEX | Tokens: ordinary | Tokens: Ψ-LEX | Ψ-LEX as a share of ordinary | Ordinary / Ψ-LEX |
 |---|---|---|---|---|---|---|
-| 18 | Task manager | 149 > 134 | 1,032 | 922 | 89% | 1.12x |
-| 19 | To-do list | 83 > 36 | 674 | 304 | 45% | 2.22x |
+| 18 | Task manager | 149 > 134 | 1,032 | 921 | 89% | 1.12x |
+| 19 | To-do list | 83 > 36 | 674 | 303 | 45% | 2.22x |
 | 20 | Price checker | 83 > 55 | 582 | 402 | 69% | 1.45x |
 | 21 | Mail queue | 146 > 34 | 1,160 | 316 | 27% | 3.67x |
 | 22 | Job engine | 401 > 68 | 2,960 | 545 | 18% | 5.43x |
-| | **Examples 18 to 22** | **862 > 327** | **6,408** | **2,489** | **39%** | **2.57x** |
+| | **Examples 18 to 22** | **862 > 327** | **6,408** | **2,487** | **39%** | **2.58x** |
 
-The table is in `o200k`. With `cl100k` the ratios are 1.12, 2.22, 1.43, 3.64, 5.42 and 2.56 times. Taking the docstrings and the blank lines out of both versions changes little: 1.14 times for the task manager, 2.21 for the to-do list, 1.45 for the price checker, 3.67 for the mail queue, 5.42 for the job engine and 2.67 for all five.
+The table is in `o200k`. With `cl100k` the ratios are 1.12, 2.23, 1.43, 3.64, 5.42 and 2.56 times. Taking the docstrings and the blank lines out of both versions changes little: 1.14 times for the task manager, 2.22 for the to-do list, 1.45 for the price checker, 3.67 for the mail queue, 5.42 for the job engine and 2.67 for all five.
 
-These numbers were counted again after the programs were written with the short lines of the [README](README.md#plain-lines). The first count, made when `def`, `print`, `raise` and `import` were written as Python writes them, was 2,535 tokens in Ψ-LEX for the five programs; with the short lines it is 2,489, which is 46 fewer (1.8%). The first count also had one wrong number: the ordinary job engine has no docstrings, only blank lines, so without them it is 2,954 tokens and not 2,895; its ratio was 5.35 and not 5.24, and the five together 2.62 and not 2.59. The numbers above are counted from the files. Examples 20 and 21 were changed later to begin with `asyncio` instead of `import asyncio` (see [Plain lines](README.md#plain-lines)); their counts did not change.
+These numbers were counted again after the programs were written with the short lines of the [README](README.md#plain-lines). The first count, made when `def`, `print`, `raise` and `import` were written as Python writes them, was 2,535 tokens in Ψ-LEX for the five programs; with the short lines it is 2,487, which is 48 fewer (1.9%). Two of the 48 come from writing one name and its module the short way (`Path: pathlib` for `from pathlib import Path`, see [Plain lines](README.md#plain-lines)), which was done later in examples 18 and 19: one token fewer in each, in `o200k` and in `cl100k` (922 to 921 and 304 to 303 in `o200k`). The first count also had one wrong number: the ordinary job engine has no docstrings, only blank lines, so without them it is 2,954 tokens and not 2,895; its ratio was 5.35 and not 5.24, and the five together 2.62 and not 2.59. The numbers above are counted from the files. Examples 20 and 21 were changed later to begin with `asyncio` instead of `import asyncio` (see [Plain lines](README.md#plain-lines)); their counts did not change. Examples 23 and 24 were changed in the same way as 18 and 19 and are not counted here.
 
 What the numbers say:
 

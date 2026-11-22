@@ -1,7 +1,7 @@
 ⌬
 os tempfile
-from dataclasses import field
-from sklearn.linear_model import LinearRegression
+field: dataclasses
+LinearRegression: sklearn.linear_model
 
 logger ← ● "ShopReport", "WARNING"
 ❝ Quality, "GOOD FAIR POOR"

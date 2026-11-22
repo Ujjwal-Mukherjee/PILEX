@@ -1,8 +1,8 @@
 asyncio os tempfile
 ⌬
 LinearRegression, Ridge: sklearn.linear_model
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestRegressor
+DecisionTreeRegressor: sklearn.tree
+RandomForestRegressor: sklearn.ensemble
 
 logger ← ● "Experiments", "WARNING"
 ❝ JobStatus, "PENDING RUNNING COMPLETED FAILED RETRYING DEAD_LETTER"

@@ -114,10 +114,15 @@ In examples 18 to 25 some of Python's own lines are written the short way. Ψ-LE
 | `asyncio time uuid` | `import asyncio, time, uuid` |
 | `Any, Dict: typing` | `from typing import Any, Dict` |
 | `sys` (alone, at the top) | `import sys` |
+| `Path: pathlib` (at the top) | `from pathlib import Path` |
 
-In a text, a value between `<` and `>` is filled in, as in an f-string; after the value can come a width (`3 wide`, then `left`, `right` or `middle`) and a number of decimals (`2 decimals`). In a `print` line and an `error` line the texts in double quotes are read this way; anywhere else a text needs the `p` in front of its quote marks. A single name (`from pathlib import Path`) is written as Python writes it, because Python can read that line itself. A single module alone on a line is an import only in the first lines of a program, before the first line that is not an import (examples 20 and 21 begin that way): there Python would stop on the name, because nothing has brought it in, so no working program is read in a new way. Further down it stays a name.
+In a text, a value between `<` and `>` is filled in, as in an f-string; after the value can come a width (`3 wide`, then `left`, `right` or `middle`) and a number of decimals (`2 decimals`). In a `print` line and an `error` line the texts in double quotes are read this way; anywhere else a text needs the `p` in front of its quote marks.
 
-Examples 18 to 24 were first run with these lines written the Python way (in examples 23 and 24 the import line was a sign at first; it brings in the same modules). Written the short way they are the same programs and read as the same Python, so the outputs shown are what they print. Example 25 was written the short way from the start; its three imports of a single name are written as Python writes them, as said above.
+One module alone on a line (`sys`) and one name with its module (`Path: pathlib`) are lines that Python can read itself: a name, and a name given a type. So each is read as an import only in the first lines of a program, before the first line that is something else than an import (examples 20 and 21 begin with a module alone, and examples 18, 19, 23 and 24 have lines of one name and its module). The text that opens a program, a comment and a sign that only brings in modules may stand before them. There Python would stop on the name, or on the module, because nothing has brought it in, so no working program is read in a new way. Further down such a line stays what Python reads. So does a line at the top with a name that Python knows from the start (`count: int`) or a module that an import above has brought in.
+
+Two cases are not like that. After `from __future__ import annotations` Python does not work the type out, so `Path: pathlib` would not stop there, and it is left as Python's own. From Python 3.14 a type is no longer worked out when the line runs, so a program that keeps a name with a type that is not defined yet (`x: Later`) among its first lines would be read as an import and stop, loudly, with no module of that name. That case was not tried, because Python 3.14 is not installed here.
+
+Examples 18 to 24 were first run with these lines written the Python way (in examples 23 and 24 the import line was a sign at first; it brings in the same modules; in examples 18, 19, 23 and 24 the lines of one name and its module were `from ... import ...` lines at first). Written the short way they are the same programs and read as the same Python, so the outputs shown are what they print. Example 25 was written the short way from the start; its three imports of a single name are written as Python writes them, which works as before.
 
 ## Tokens
 
@@ -126,7 +131,7 @@ An AI pays for every token it writes. The same work in ordinary Python and in Ψ
 | What the blocks stand for | Programs | Ordinary Python | Ψ-LEX | Ψ-LEX as a share of ordinary |
 |---|---|---|---|---|
 | Almost every line is a block: examples 01 to 16 | 16 | 3,044 tokens | 872 tokens | 29% |
-| A mix, from mostly logic to mostly blocks: examples 18 to 22 | 5 | 6,408 | 2,489 | 39% |
+| A mix, from mostly logic to mostly blocks: examples 18 to 22 | 5 | 6,408 | 2,487 | 39% |
 | A program that no block was taken from: example 25 | 1 | 1,676 | 1,541 | 92% |
 | Test programs where standard blocks fit (estimate) | 18 | 3,202 | 2,100 to 2,300 | 66% to 71% |
 | Test programs where every line is new logic (estimate) | 2 | 675 | 650 to 740 | 96% to 110% |

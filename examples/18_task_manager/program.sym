@@ -3,7 +3,7 @@
 The tasks are kept in a file called tasks.json, so they are still there the next time the program runs.
 """
 
-from pathlib import Path
+Path: pathlib
 
 TASK_FILE = Path("tasks.json")
 
