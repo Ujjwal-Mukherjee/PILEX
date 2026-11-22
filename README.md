@@ -1,15 +1,17 @@
-# PILEX
+# Ψ-LEX
+
+*Ψ-LEX is written Psi-LEX in plain letters where a symbol cannot go, as in the name of this repository. Say it “sigh-lex”.*
 
 Data-science programs written in symbols, with exactly what they print and draw.
 
 Each example is a program in symbols (`program.sym`) next to what it produced (`output.txt`, and its charts). Every program was run, and the output is what came out. This repository shows the programs and their results; the program that runs the symbols is not part of it.
 
-## Why PILEX
+## Why Ψ-LEX
 
-PILEX is a way for an AI to write a program in symbols. A person can read it too, once the symbols are known.
+Ψ-LEX is a way for an AI to write a program in symbols. A person can read it too, once the symbols are known.
 
-- **AIs will write most programs.** So PILEX is made for the one who writes, an AI, and for the one who checks. It is not made for typing by hand.
-- **A symbol means one thing.** Once an AI has learned the symbols, each one carries its meaning exactly, so there is less to get wrong. This is the bet of PILEX. It has not been measured yet.
+- **AIs will write most programs.** So Ψ-LEX is made for the one who writes, an AI, and for the one who checks. It is not made for typing by hand.
+- **A symbol means one thing.** Once an AI has learned the symbols, each one carries its meaning exactly, so there is less to get wrong. This is the bet of Ψ-LEX. It has not been measured yet.
 - **A symbol can stand for a whole block of work.** Where a program is made of standard blocks it becomes much shorter (see [Tokens](#tokens)). Where every line is new logic it does not, and it can even cost a little more. More blocks, and bigger blocks, are the way to shorten more programs.
 - **The machinery stays out of sight.** The plan is that the blocks, the engine and the translator all live in a data centre. An AI never reads their code: it writes symbols, sends them, and the answer comes back.
 - **Data science first, then ordinary programs.** Ordinary programs need loops, choices and functions in symbols as well, with the same blocks doing the standard work.
@@ -95,9 +97,9 @@ A symbol is followed by its values, separated by commas: names made earlier, num
 
 ## Tokens
 
-An AI pays for every token it writes. The same work in ordinary Python and in PILEX, counted with a public tokenizer (the numbers are approximate; two other tokenizers agree within about 5 percent):
+An AI pays for every token it writes. The same work in ordinary Python and in Ψ-LEX, counted with a public tokenizer (the numbers are approximate; two other tokenizers agree within about 5 percent):
 
-| Kind of program | Programs | Ordinary Python | PILEX | PILEX as a share of ordinary |
+| Kind of program | Programs | Ordinary Python | Ψ-LEX | Ψ-LEX as a share of ordinary |
 |---|---|---|---|---|
 | Data science, as in this repository | 16 | 3,044 tokens | 872 tokens | 29% |
 | Ordinary programs where standard blocks fit (estimate) | 18 | 3,202 | 2,100 to 2,300 | 66% to 71% |
