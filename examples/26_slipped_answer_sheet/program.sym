@@ -1,0 +1,11 @@
+accumulate: itertools
+best_gaps(key, marks):
+    ☡ len(key) != len(marks) + 1, "Exactly one answer must be missing"
+    ☡ any(choice not in "ABCD" for choice in key + marks), "Use only A, B, C or D"
+    score = sum(mark == answer for mark, answer in zip(marks, key[1:]))
+    steps = ((mark == key[i]) - (mark == key[i + 1]) for i, mark in enumerate(marks))
+    ♛ enumerate(accumulate(steps, initial=score), 1), best, gaps
+    return best, gaps
+main():
+    print best_gaps("ABBCD", "ABCD")
+➤

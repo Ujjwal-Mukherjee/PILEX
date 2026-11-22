@@ -1,6 +1,6 @@
 # Tokens: ordinary Python and Ψ-LEX
 
-Made 2026-11-21; the section on examples 18 to 22 was added on 2026-11-22 and counted again later that day, after the programs were written with the short lines of the [README](README.md#plain-lines); the section on example 25 was added on 2026-11-23, and on the same day the counts of examples 18 and 19 were taken again, after their lines of one name and its module were written the short way. Draft 2. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
+Made 2026-11-21; the section on examples 18 to 22 was added on 2026-11-22 and counted again later that day, after the programs were written with the short lines of the [README](README.md#plain-lines); the section on example 25 was added on 2026-11-23, and on the same day the counts of examples 18 and 19 were taken again, after their lines of one name and its module were written the short way, example 25 got one more block and the section on example 26, a puzzle, was added. Draft 2. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
 
 ## What was counted
 
@@ -96,17 +96,42 @@ What the numbers say:
 - **These are not an average over programs.** The blocks were found by taking programs apart: eight of them from the job engine (22) and some from the task manager (18). A program that blocks were taken from is the best case for those blocks, and even so the task manager shrinks by only 11%. Examples 19 to 21 were written afterwards, with blocks that already existed, to see whether the blocks serve other programs too (the mail queue uses the same job-engine blocks as example 22). They show reuse; they are not an average either.
 - **Not counted:** examples 23 and 24, because no ordinary version of them was written, and, as before, whether symbols make an AI write fewer mistakes.
 
-## Example 25, a program that no block was taken from
+## Example 25, a program that no block was taken from (at first)
 
-Example 25 is a register of mock tests. It has an ordinary Python program that does the same work (201 lines; like the ordinary programs of examples 18 to 22, it is not in this repository). Unlike those five, it was not taken apart to find blocks: it is written with the short lines of the [README](README.md#plain-lines) and with three blocks that existed before it. The file was counted as it is, like the others.
+Example 25 is a register of mock tests. It has an ordinary Python program that does the same work (201 lines; like the ordinary programs of examples 18 to 22, it is not in this repository). Unlike those five, it was not taken apart to find blocks: when it was first written, it used the short lines of the [README](README.md#plain-lines) and three blocks that existed before it. The file was counted as it is, like the others.
 
 | # | Program | Lines (blank ones too): ordinary > Ψ-LEX | Tokens: ordinary | Tokens: Ψ-LEX | Ψ-LEX as a share of ordinary | Ordinary / Ψ-LEX |
 |---|---|---|---|---|---|---|
-| 25 | Register of mock tests | 201 > 188 | 1,676 | 1,541 | 92% | 1.09x |
+| 25 | Register of mock tests, as first written | 201 > 188 | 1,676 | 1,541 | 92% | 1.09x |
 
 With `cl100k` it is 1,658 and 1,530 tokens, 92% and 1.08 times. Of the 135 tokens saved in `o200k`, 37 come from the short lines and 98 from the three blocks and their signs. That is a small saving, for the reason the task manager's was small: most of the program is its own logic (a menu, an exam report, a history, a quiz), and a block stands only where other programs do the same work.
 
 The two programs were run with the same answers in 21 scenarios of answers and files: a wrong answer at every question, marks on the edges (39, 40, 41, 79, 80, 100, 0 and -1), an exam with no results, a damaged file, an empty file, a file that is not a list, a file that is not written in UTF-8, a folder where the file should be, a day written another way in the file, the end of the input in the middle of a question, Bengali names and digits, and more. They gave the same screens and the same files in 20 of them. In the 21st, a save when a folder has the name of the temporary file, the ordinary program saves and the Ψ-LEX program stops with the error: it saves through a temporary file with a fixed name, the ordinary one through a file with a name of its own. The saved file also has another mode: the ordinary program leaves it readable by its owner only, the Ψ-LEX program gives it the mode of a new file. The modes were not compared.
+
+**Then one more block.** Later on 2026-11-23 one more block was found by looking at this program and at the puzzle of example 26, which have a piece of work in common. The program was written again with that block, and its three lines of one name and its module were written the short way (`Path: pathlib`, see the [README](README.md#plain-lines)). The file in this repository is this version.
+
+| # | Program | Lines (blank ones too): ordinary > Ψ-LEX | Tokens: ordinary | Tokens: Ψ-LEX | Ψ-LEX as a share of ordinary | Ordinary / Ψ-LEX |
+|---|---|---|---|---|---|---|
+| 25 | Register of mock tests, with the fourth block | 201 > 178 | 1,676 | 1,474 | 88% | 1.14x |
+
+With `cl100k` it is 1,658 and 1,463 tokens, 88% and 1.13 times. Of the 202 tokens saved in `o200k`, 40 come from the short lines (the 37 from before and 3 from the lines of one name and its module), 98 from the first three blocks and 64 from the fourth. **The fourth block was taken from this program, so this count is not a test of a program that no block was taken from. The first count, 92%, is.** The new program gave the same two screens and the same file as the old one (byte for byte), and the 21 scenarios gave the same result as before: the same screens and files in 20 of them, and the same one difference in the 21st.
+
+## Example 26, a small puzzle
+
+Example 26 is a puzzle, not a program anyone needs, and it is almost all new logic. A student's answer sheet has one answer too few: one question was skipped, and every answer after it was written one line too early. For each question that could have been the skipped one, the answers are lined up with the key and the score is counted; the program gives the best score and every question that reaches it. For the key `ABBCD` and the answers `ABCD` it prints `(4, [2, 3])`. It also checks what it is given: exactly one answer must be missing, and only A, B, C or D may be used.
+
+The Python that came with the puzzle does the same work. Like the other ordinary programs it is not in this repository. It has a docstring, two comments and blank lines, and the Ψ-LEX file has none of them, so the counts are shown in steps (`o200k`; the numbers in `cl100k` are one or two less):
+
+| What is counted | Lines | Tokens | Ψ-LEX as a share of it |
+|---|---|---|---|
+| The Python that came with the puzzle, as it is | 31 | 249 | 63% |
+| The same without its docstring, comments and blank lines | 22 | 205 | 77% |
+| The same work written the short way in ordinary Python (the score kept with `accumulate`, the best taken with `max`) | 13 | 182 | 86% |
+| Ψ-LEX (`program.sym`) | 11 | 157 | |
+
+Of the 92 tokens saved against the Python as it came, 44 are the docstring, the comments and the blank lines, which the Ψ-LEX file does not have, and 23 are from writing the function another way, which ordinary Python can do too. What the short lines and the signs of the file save is the last 25 tokens: 1.16 times against the same function in ordinary Python. Of those 25, 15 are the block: with the best taken by `max` in a plain line instead of the block, the Ψ-LEX file is 172 tokens. Most of this puzzle is its own logic, so there is little to shorten, as in the task manager.
+
+The Ψ-LEX program and the Python that came with the puzzle were run on 42,731 inputs, 24,525 of which have an answer and 18,206 an error, with the same messages: no difference. A separate program, written for the check, agreed with the Ψ-LEX program on 121,166 keys and answers (all of them for two letters up to 8 questions and for four letters up to 4, and 60,000 random ones up to 14). The short ordinary version of the table agreed with the Python that came with the puzzle on 534,382 inputs. One block of the file was found with this puzzle and with example 25, so the puzzle is not a test of a program that no block was taken from either.
 
 ## What stays out of the AI's sight
 

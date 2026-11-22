@@ -1,8 +1,8 @@
 """A single-teacher terminal register. Scores are marks out of 100."""
 
-from datetime import date
-from itertools import count
-from pathlib import Path
+date: datetime
+count: itertools
+Path: pathlib
 
 REGISTER = Path(__file__).with_name("mock_tests.json")
 
@@ -17,16 +17,6 @@ last_where(items, test):
 
 filter_map(items, test, make):
     return [make(item) for item in items if test(item)]
-
-
-all_best(scored_items):
-    best, winners = None, []
-    for item, score in scored_items:
-        if best is None or score > best:
-            best, winners = score, [item]
-        elif score == best:
-            winners.append(item)
-    return best, winners
 
 
 run_until(items, state, advance, stop):
@@ -104,7 +94,7 @@ exam_report(rows):
         first_wrong = wrong[0] if wrong is not None else "none"
         print "#<row['roll']> <row['name']>: <row['score']>/100 | first wrong: <first_wrong>"
 
-    best, winners = all_best((r, r["score"]) for r in group)
+    ♛ (r, r["score"]) for r in group
     print "Highest marks (<best>):", ", ".join("<r['name']> (#<r['roll']>)" for r in winners)
     gaps = filter_map(group, lambda r: r["score"] < 40,
                       lambda r: (r["roll"], r["name"], 40 - r["score"]))
