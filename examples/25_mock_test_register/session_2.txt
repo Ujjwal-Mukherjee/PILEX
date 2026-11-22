@@ -1,0 +1,38 @@
+
+1 Add result | 2 Exam report | 3 Student history | 4 Force quiz | 0 Quit
+> 3
+Student roll: 1
+2026-11-13 | Mock 1 | 82/100
+2026-11-20 | Mock 2 | 91/100
+Latest 80+: 2026-11-20 | Mock 2 | 91/100
+
+1 Add result | 2 Exam report | 3 Student history | 4 Force quiz | 0 Quit
+> 1
+Exam date YYYY-MM-DD [today]: 2026-11-20
+Exam title: Mock 2
+Student roll: ১১
+Student name: রবি
+Marks out of 100: 58
+Questions in order (C correct, W wrong, - skipped): CWC-
+Saved.
+
+1 Add result | 2 Exam report | 3 Student history | 4 Force quiz | 0 Quit
+> 2
+Exam date YYYY-MM-DD [today]: 2026-11-20
+Exam title: Mock 2
+#1 Asha: 91/100 | first wrong: none
+#১১ রবি: 58/100 | first wrong: 2
+Highest marks (91): Asha (#1)
+Below 40:
+  None
+
+1 Add result | 2 Exam report | 3 Student history | 4 Force quiz | 0 Quit
+> 3
+Student roll: ১১
+2026-11-13 | Mock 1 | 35/100
+2026-11-20 | Mock 2 | 58/100
+No score of 80 or above yet.
+
+1 Add result | 2 Exam report | 3 Student history | 4 Force quiz | 0 Quit
+> 
+Goodbye.

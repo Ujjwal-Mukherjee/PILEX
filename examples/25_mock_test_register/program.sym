@@ -1,0 +1,188 @@
+"""A single-teacher terminal register. Scores are marks out of 100."""
+
+from datetime import date
+from itertools import count
+from pathlib import Path
+
+REGISTER = Path(__file__).with_name("mock_tests.json")
+
+
+first_where(items, test):
+    return next((item for item in items if test(item)), None)
+
+
+last_where(items, test):
+    return first_where(reversed(items), test)
+
+
+filter_map(items, test, make):
+    return [make(item) for item in items if test(item)]
+
+
+all_best(scored_items):
+    best, winners = None, []
+    for item, score in scored_items:
+        if best is None or score > best:
+            best, winners = score, [item]
+        elif score == best:
+            winners.append(item)
+    return best, winners
+
+
+run_until(items, state, advance, stop):
+    steps = 0
+    for steps, item in enumerate(items, 1):
+        state = advance(state, item)
+        if stop(state):
+            return state, steps, True
+    return state, steps, False
+
+
+load():
+    rows ← ⎰ REGISTER, []
+    if not isinstance(rows, list):
+        error "Expected a list of results."
+    for row in rows:
+        if not isinstance(row, dict):
+            error "Invalid result entry."
+        for field in ("day", "exam", "roll", "name", "answers"):
+            if not isinstance(row.get(field), str) or not row[field].strip():
+                error "Invalid field: <field>"
+        date.fromisoformat(row["day"])
+        if type(row.get("score")) is not int or not 0 <= row["score"] <= 100:
+            error "Invalid stored score."
+        if any(answer not in "CW-" for answer in row["answers"]):
+            error "Invalid stored question results."
+    return rows
+
+
+save(rows):
+    text ← ⏟ rows, 2
+    ⇟ str(REGISTER), text
+
+
+ask(label):
+    answer = input(label).strip()
+    if not answer:
+        error "A value is required."
+    return answer
+
+
+exam_key():
+    day = input("Exam date YYYY-MM-DD [today]: ").strip()
+    day = date.fromisoformat(day) if day else date.today()
+    return day.isoformat(), ask("Exam title: ")
+
+
+add_result(rows):
+    day, exam = exam_key()
+    roll = ask("Student roll: ")
+    if any((r["day"], r["exam"], r["roll"]) == (day, exam, roll) for r in rows):
+        print "This roll already has a result for that exam."
+        return
+    name = ask("Student name: ")
+    score = int(ask("Marks out of 100: "))
+    if not 0 <= score <= 100:
+        error "Marks must be from 0 to 100."
+    answers = ask("Questions in order (C correct, W wrong, - skipped): ").upper()
+    if any(answer not in "CW-" for answer in answers):
+        error "Use one C, W or - per question, for example CC-W."
+    row = dict(day=day, exam=exam, roll=roll, name=name, score=score, answers=answers)
+    save(rows + [row])
+    rows.append(row)
+    print "Saved."
+
+
+exam_report(rows):
+    day, exam = exam_key()
+    group = [r for r in rows if (r["day"], r["exam"]) == (day, exam)]
+    if not group:
+        print "No results for this exam."
+        return
+    for row in group:
+        wrong = first_where(enumerate(row["answers"], 1), lambda q: q[1] == "W")
+        first_wrong = wrong[0] if wrong is not None else "none"
+        print "#<row['roll']> <row['name']>: <row['score']>/100 | first wrong: <first_wrong>"
+
+    best, winners = all_best((r, r["score"]) for r in group)
+    print "Highest marks (<best>):", ", ".join("<r['name']> (#<r['roll']>)" for r in winners)
+    gaps = filter_map(group, lambda r: r["score"] < 40,
+                      lambda r: (r["roll"], r["name"], 40 - r["score"]))
+    print "Below 40:"
+    if not gaps:
+        print "  None"
+    for roll, name, gap in gaps:
+        print "  #<roll> <name> needs <gap> more marks."
+
+
+student_history(rows):
+    roll = ask("Student roll: ")
+    history = sorted((r for r in rows if r["roll"] == roll), key=lambda r: r["day"])
+    if not history:
+        print "No results for that roll."
+        return
+    for row in history:
+        print "<row['day']> | <row['exam']> | <row['score']>/100"
+    # On the same date the most recently entered result comes last.
+    latest = last_where(history, lambda r: r["score"] >= 80)
+    if latest is None:
+        print "No score of 80 or above yet."
+    else:
+        print "Latest 80+: <latest['day']> | <latest['exam']> | <latest['score']>/100"
+
+
+practice_answers():
+    print "Force quiz: get three consecutive answers right. Enter q to leave."
+    for question in count(1):
+        mass = 1 + question % 9
+        acceleration = 1 + (question // 3) % 7
+        while True:
+            answer = input(p"<mass> kg at <acceleration> m/s²: net force in N? ").strip()
+            if answer.lower() == "q":
+                return
+            try:
+                correct = int(answer) == mass * acceleration
+            except ValueError:
+                print "Enter an integer or q."
+                continue
+            print "Correct." if correct else "Answer: <mass * acceleration> N."
+            yield correct
+            break
+
+
+main():
+    try:
+        rows = load()
+    except (OSError, ValueError) as error:
+        print "Cannot open register: <error>"
+        return
+    while True:
+        print "\n1 Add result | 2 Exam report | 3 Student history | 4 Force quiz | 0 Quit"
+        choice = input("> ").strip()
+        try:
+            if choice == "1":
+                add_result(rows)
+            elif choice == "2":
+                exam_report(rows)
+            elif choice == "3":
+                student_history(rows)
+            elif choice == "4":
+                streak, attempts, done = run_until(
+                    practice_answers(), 0,
+                    lambda previous, correct: previous + 1 if correct else 0,
+                    lambda current: current == 3,
+                )
+                print "<'Target reached' if done else 'Stopped'> | attempts: <attempts> | streak: <streak>"
+            elif choice == "0":
+                return
+            else:
+                print "Choose 0 to 4."
+        except (ValueError, OSError) as error:
+            print error
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except (EOFError, KeyboardInterrupt):
+        print "\nGoodbye."

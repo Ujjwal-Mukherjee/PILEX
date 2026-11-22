@@ -1,0 +1,42 @@
+[
+  {
+    "day": "2026-11-13",
+    "exam": "Mock 1",
+    "roll": "1",
+    "name": "Asha",
+    "score": 82,
+    "answers": "CCWC"
+  },
+  {
+    "day": "2026-11-13",
+    "exam": "Mock 1",
+    "roll": "১১",
+    "name": "রবি",
+    "score": 35,
+    "answers": "WW-C"
+  },
+  {
+    "day": "2026-11-13",
+    "exam": "Mock 1",
+    "roll": "3",
+    "name": "Mina",
+    "score": 40,
+    "answers": "C-CW"
+  },
+  {
+    "day": "2026-11-20",
+    "exam": "Mock 2",
+    "roll": "1",
+    "name": "Asha",
+    "score": 91,
+    "answers": "CCCC"
+  },
+  {
+    "day": "2026-11-20",
+    "exam": "Mock 2",
+    "roll": "১১",
+    "name": "রবি",
+    "score": 58,
+    "answers": "CWC-"
+  }
+]

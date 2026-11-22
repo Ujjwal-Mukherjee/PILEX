@@ -1,6 +1,6 @@
 # Tokens: ordinary Python and Ψ-LEX
 
-Made 2026-11-21; the section on examples 18 to 22 was added on 2026-11-22 and counted again later that day, after the programs were written with the short lines of the [README](README.md#plain-lines). Draft 2. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
+Made 2026-11-21; the section on examples 18 to 22 was added on 2026-11-22 and counted again later that day, after the programs were written with the short lines of the [README](README.md#plain-lines); the section on example 25 was added on 2026-11-23. Draft 2. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
 
 ## What was counted
 
@@ -95,6 +95,18 @@ What the numbers say:
 - **The saving follows how much of the program the blocks stand for.** The task manager is mostly its own logic: the menu, what a task is, what is printed. The signs make it only 11% shorter in tokens, 1.12 times. The job engine is mostly blocks, and it comes out 5.4 times shorter. The other three lie between.
 - **These are not an average over programs.** The blocks were found by taking programs apart: eight of them from the job engine (22) and some from the task manager (18). A program that blocks were taken from is the best case for those blocks, and even so the task manager shrinks by only 11%. Examples 19 to 21 were written afterwards, with blocks that already existed, to see whether the blocks serve other programs too (the mail queue uses the same job-engine blocks as example 22). They show reuse; they are not an average either.
 - **Not counted:** examples 23 and 24, because no ordinary version of them was written, and, as before, whether symbols make an AI write fewer mistakes.
+
+## Example 25, a program that no block was taken from
+
+Example 25 is a register of mock tests. It has an ordinary Python program that does the same work (201 lines; like the ordinary programs of examples 18 to 22, it is not in this repository). Unlike those five, it was not taken apart to find blocks: it is written with the short lines of the [README](README.md#plain-lines) and with three blocks that existed before it. The file was counted as it is, like the others.
+
+| # | Program | Lines (blank ones too): ordinary > Ψ-LEX | Tokens: ordinary | Tokens: Ψ-LEX | Ψ-LEX as a share of ordinary | Ordinary / Ψ-LEX |
+|---|---|---|---|---|---|---|
+| 25 | Register of mock tests | 201 > 188 | 1,676 | 1,541 | 92% | 1.09x |
+
+With `cl100k` it is 1,658 and 1,530 tokens, 92% and 1.08 times. Of the 135 tokens saved in `o200k`, 37 come from the short lines and 98 from the three blocks and their signs. That is a small saving, for the reason the task manager's was small: most of the program is its own logic (a menu, an exam report, a history, a quiz), and a block stands only where other programs do the same work.
+
+The two programs were run with the same answers in 21 scenarios of answers and files: a wrong answer at every question, marks on the edges (39, 40, 41, 79, 80, 100, 0 and -1), an exam with no results, a damaged file, an empty file, a file that is not a list, a file that is not written in UTF-8, a folder where the file should be, a day written another way in the file, the end of the input in the middle of a question, Bengali names and digits, and more. They gave the same screens and the same files in 20 of them. In the 21st, a save when a folder has the name of the temporary file, the ordinary program saves and the Ψ-LEX program stops with the error: it saves through a temporary file with a fixed name, the ordinary one through a file with a name of its own. The saved file also has another mode: the ordinary program leaves it readable by its owner only, the Ψ-LEX program gives it the mode of a new file. The modes were not compared.
 
 ## What stays out of the AI's sight
 

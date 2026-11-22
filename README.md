@@ -2,7 +2,7 @@
 
 *Ψ-LEX is written Psi-LEX in plain letters where a symbol cannot go, as in the name of this repository. Say it “sigh-lex”.*
 
-Programs written in symbols, with exactly what they print and draw. Examples 01 to 17 work on data: tables, charts and simple models. Examples 18 to 24 are other programs: a task manager for the terminal, a to-do list, a price checker, a mail queue, a job engine, a shop report and a comparison of models. Ψ-LEX itself is not for one kind of program. A symbol stands for one block of work, and what it is used for is up to whoever writes the program.
+Programs written in symbols, with exactly what they print and draw. Examples 01 to 17 work on data: tables, charts and simple models. Examples 18 to 25 are other programs: a task manager for the terminal, a to-do list, a price checker, a mail queue, a job engine, a shop report, a comparison of models and a register of mock tests. Ψ-LEX itself is not for one kind of program. A symbol stands for one block of work, and what it is used for is up to whoever writes the program.
 
 Each example is a program in symbols (`program.sym`) next to what it produced (`output.txt`, and its charts). Every program was run, and the output is what came out. This repository shows the programs and their results; the program that runs the symbols is not part of it.
 
@@ -14,7 +14,7 @@ Each example is a program in symbols (`program.sym`) next to what it produced (`
 - **A symbol means one thing.** Once an AI has learned the symbols, each one carries its meaning exactly, so there is less to get wrong. This is the bet of Ψ-LEX. It has not been measured yet.
 - **A symbol can stand for a whole block of work.** Where a program is made of standard blocks it becomes much shorter (see [Tokens](#tokens)). Where every line is new logic it does not, and it can even cost a little more. More blocks, and bigger blocks, are the way to shorten more programs.
 - **The machinery stays out of sight.** The plan is that the blocks, the engine and the translator all live in a data centre. An AI never reads their code: it writes symbols, sends them, and the answer comes back.
-- **No symbol is only for one kind of program.** Python is one language, and what you get depends on how you use it; it is the same with the symbols. Python's own words (loops, choices, functions) have no symbols yet, so they stay between the lines of signs (see examples 18 to 24), a few kinds of line written the short way (see [Plain lines](#plain-lines)); a symbol for one will be made when it is needed.
+- **No symbol is only for one kind of program.** Python is one language, and what you get depends on how you use it; it is the same with the symbols. Python's own words (loops, choices, functions) have no symbols yet, so they stay between the lines of signs (see examples 18 to 25), a few kinds of line written the short way (see [Plain lines](#plain-lines)); a symbol for one will be made when it is needed.
 
 Not shown yet: that symbols make an AI write fewer wrong programs, and the data-centre arrangement (today the engine runs in a notebook). [TOKENS.md](TOKENS.md) says what is measured and what is not.
 
@@ -95,11 +95,11 @@ symbol values            show the result: a table, numbers or a chart
 
 A symbol is followed by its values, separated by commas: names made earlier, numbers, a list in square brackets, or text in quotes. Column names, titles and file names are your own words, in any language.
 
-From example 18 on, a program is Python with lines of signs in it. Python's own lines (`if`, `for`, `return`, `try` and the rest) stay as they are, a few kinds of line can be written the short way (see [Plain lines](#plain-lines)), and a line of signs has the same two forms. Its values can be any Python expression, and a sign can be followed by indented lines, which it then takes as part of its work. The table of symbols below lists the 34 symbols of examples 01 to 17; the signs of examples 18 to 24 are not listed in this repository.
+From example 18 on, a program is Python with lines of signs in it. Python's own lines (`if`, `for`, `return`, `try` and the rest) stay as they are, a few kinds of line can be written the short way (see [Plain lines](#plain-lines)), and a line of signs has the same two forms. Its values can be any Python expression, and a sign can be followed by indented lines, which it then takes as part of its work. The table of symbols below lists the 34 symbols of examples 01 to 17; the signs of examples 18 to 25 are not listed in this repository.
 
 ## Plain lines
 
-In examples 18 to 24 some of Python's own lines are written the short way. Ψ-LEX reads each of them as the Python line it stands for, one line for one line. A line written the Python way works as before, and the two can be mixed: a short form is read only where Python itself would not understand the line.
+In examples 18 to 25 some of Python's own lines are written the short way. Ψ-LEX reads each of them as the Python line it stands for, one line for one line. A line written the Python way works as before, and the two can be mixed: a short form is read only where Python itself would not understand the line.
 
 | Written | Stands for |
 |---|---|
@@ -117,7 +117,7 @@ In examples 18 to 24 some of Python's own lines are written the short way. Ψ-LE
 
 In a text, a value between `<` and `>` is filled in, as in an f-string; after the value can come a width (`3 wide`, then `left`, `right` or `middle`) and a number of decimals (`2 decimals`). In a `print` line and an `error` line the texts in double quotes are read this way; anywhere else a text needs the `p` in front of its quote marks. A single name (`from pathlib import Path`) is written as Python writes it, because Python can read that line itself. A single module alone on a line is an import only in the first lines of a program, before the first line that is not an import (examples 20 and 21 begin that way): there Python would stop on the name, because nothing has brought it in, so no working program is read in a new way. Further down it stays a name.
 
-Examples 18 to 24 were first run with these lines written the Python way (in examples 23 and 24 the import line was a sign at first; it brings in the same modules). Written the short way they are the same programs and read as the same Python, so the outputs shown are what they print.
+Examples 18 to 24 were first run with these lines written the Python way (in examples 23 and 24 the import line was a sign at first; it brings in the same modules). Written the short way they are the same programs and read as the same Python, so the outputs shown are what they print. Example 25 was written the short way from the start; its three imports of a single name are written as Python writes them, as said above.
 
 ## Tokens
 
@@ -127,10 +127,11 @@ An AI pays for every token it writes. The same work in ordinary Python and in Ψ
 |---|---|---|---|---|
 | Almost every line is a block: examples 01 to 16 | 16 | 3,044 tokens | 872 tokens | 29% |
 | A mix, from mostly logic to mostly blocks: examples 18 to 22 | 5 | 6,408 | 2,489 | 39% |
+| A program that no block was taken from: example 25 | 1 | 1,676 | 1,541 | 92% |
 | Test programs where standard blocks fit (estimate) | 18 | 3,202 | 2,100 to 2,300 | 66% to 71% |
 | Test programs where every line is new logic (estimate) | 2 | 675 | 650 to 740 | 96% to 110% |
 
-The first row is measured, and it is the best case: these programs were written to show the symbols, and almost every line is a block. The second row is measured too, and it is a mix. The job engine (example 22) comes out at 18% of its ordinary size and the task manager (example 18) at 89%, because most of the task manager is its own logic. The blocks were found by taking programs apart, these two among them, so this row is not an average over programs. The last two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. The programs, ordinary versions and method of the first row, and the counts of the second, are in [TOKENS.md](TOKENS.md). The ordinary versions of examples 18 to 22 are not shown. Examples 23 and 24 are not counted: no ordinary version of them was written.
+The first row is measured, and it is the best case: these programs were written to show the symbols, and almost every line is a block. The second row is measured too, and it is a mix. The job engine (example 22) comes out at 18% of its ordinary size and the task manager (example 18) at 89%, because most of the task manager is its own logic. The blocks were found by taking programs apart, these two among them, so this row is not an average over programs. The third row is measured too: example 25, a register of mock tests, is a program that no block was taken from (the three blocks it uses existed before), and it comes out at 92% of its ordinary size, because most of it is its own logic. The last two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. The programs, ordinary versions and method of the first row, and the counts of the second and the third, are in [TOKENS.md](TOKENS.md). The ordinary versions of examples 18 to 22 and 25 are not shown. Examples 23 and 24 are not counted: no ordinary version of them was written.
 
 ## The symbols
 
@@ -217,7 +218,8 @@ The first row is measured, and it is the best case: these programs were written 
 | 22 | A job engine: two payments, a report and a heavy sum run by three workers, with tries and a time limit | further signs | [program](examples/22_job_engine/program.sym) | [output](examples/22_job_engine/output.txt) |
 | 23 | A shop report: a download that fails twice, cleaning, a model, two charts, a log and a small database | further signs | [program](examples/23_shop_report/program.sym) | [output](examples/23_shop_report/output.txt), charts [1](examples/23_shop_report/charts/chart_1.png) [2](examples/23_shop_report/charts/chart_2.png) |
 | 24 | Five models tried as jobs, one of them too slow, ranked by how well they guess | further signs | [program](examples/24_compare_models/program.sym) | [output](examples/24_compare_models/output.txt) |
+| 25 | A register of mock tests for the terminal: a menu, a file of results that is kept between runs, an exam report, a student's history, a quiz that ends after three right answers in a row, Bengali names and digits | further signs | [program](examples/25_mock_test_register/program.sym) | [first run](examples/25_mock_test_register/session_1.txt), [second run](examples/25_mock_test_register/session_2.txt), [the file it kept](examples/25_mock_test_register/mock_tests.json) |
 
-Examples 18 to 24 use further signs, each standing for one block of work as the symbols above do. Those blocks are not described in this repository, so these programs are shown with what they did and nothing more. The screens are real runs: the times and the job numbers in the logs change from run to run (in example 22 a payment may or may not fail on its first try). In example 18 the answers were typed by a script; the screen shows them after the prompts, as a terminal does.
+Examples 18 to 25 use further signs, each standing for one block of work as the symbols above do. Those blocks are not described in this repository, so these programs are shown with what they did and nothing more. The screens are real runs: the times and the job numbers in the logs change from run to run (in example 22 a payment may or may not fail on its first try). In examples 18 and 25 the answers were typed by a script; the screen shows them after the prompts, as a terminal does, and the second run of example 25 ends where its answers end, as if Ctrl-D was pressed.
 
 *Draft 2.*
