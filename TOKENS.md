@@ -41,24 +41,24 @@ Three tokenizers were used: `o200k` (the GPT-4o family), `cl100k` (GPT-4) and th
 
 The middle program saves 3.1 times; the smallest saving is 1.7 times (examples 04 and 08, which are only three lines of Ψ-LEX each) and the largest is 22.8 times (example 16, where one line of Ψ-LEX stands for a whole report).
 
-**These are the best case.** The symbols were made for exactly this kind of program, and the 16 programs were written to show the symbols. The next section is about programs that were not.
+**These are the best case.** The 16 programs were written to show the symbols, and almost every line of them is a block. The next section is about test programs that were not.
 
 ## How much one line stands for
 
 The saving follows the size of the block of work that one symbol stands for.
 
-| Kind of program | Ordinary lines for each Ψ-LEX line | Tokens: ordinary / Ψ-LEX |
+| What the lines are made of | Ordinary lines for each Ψ-LEX line | Tokens: ordinary / Ψ-LEX |
 |---|---|---|
 | Whole recipes (example 16) | 12.7 | 22.8x |
-| Steps of data science (the other 15 examples) | 2.5 | 3.0x |
-| Ordinary programs where standard blocks fit (estimate, see below) | 1.6 | 1.4x to 1.5x |
-| Ordinary programs of new logic (estimate, see below) | 1.1 | 0.9x to 1.0x |
+| Single steps (the other 15 examples) | 2.5 | 3.0x |
+| Test programs where standard blocks fit (estimate, see below) | 1.6 | 1.4x to 1.5x |
+| Test programs of new logic (estimate, see below) | 1.1 | 0.9x to 1.0x |
 
 So a larger set of blocks, and bigger blocks, is the way to shorten more programs. How far that goes for programs that are mostly new logic is not known; there the measured saving was about nothing.
 
-## Ordinary programs, not data science (an estimate)
+## Twenty test programs (an estimate)
 
-Ψ-LEX has no ordinary programs yet, so this part is an estimate. Twenty small test programs were written twice, in ordinary Python and with ready-made standard blocks, the kind Ψ-LEX is built on: 18 where such blocks fit (reading and writing files, CSV and JSON, a small database, dates, logs, command-line options, classes with their own errors, route finding, statistics, a chart) and 2 where every line is new logic (a stock-command interpreter and a calculator for text). The two versions were run and gave the same output and the same files in all 20. They are not in this repository.
+This part is an estimate, because none of the test programs is written in Ψ-LEX yet. Twenty small test programs were written twice, in ordinary Python and with ready-made standard blocks, the kind Ψ-LEX is built on: 18 where such blocks fit (reading and writing files, CSV and JSON, a small database, dates, logs, command-line options, classes with their own errors, route finding, statistics, a chart) and 2 where every line is new logic (a stock-command interpreter and a calculator for text). The two versions were run and gave the same output and the same files in all 20. They are not in this repository.
 
 The blocks have no symbols yet, so each block line was turned into a stand-in sign for counting only, in the style of Ψ-LEX (the parentheses go, a sign stands where the name was). The stand-ins are not proposals. Two cases are shown: every sign costs one token, or every sign costs two. Signs for Python's own words (`if`, `for`, `def` and so on) are shown separately, because most of those words are one token already and most rare signs cost two or three.
 
@@ -82,4 +82,4 @@ The 16 programs above are 872 tokens. The engine turns them into about 20,000 to
 - **That symbols make an AI write fewer wrong programs.** This is the bet of Ψ-LEX, and it has not been measured. A test: give the same tasks to an AI in ordinary Python and in Ψ-LEX, and count the wrong answers and the retries.
 - **The cost of learning the symbols.** An AI that has not learned them must be shown what each block does, which for a few hundred blocks is thousands of tokens every conversation, enough to cancel the saving of more than a hundred programs. The plan is to teach the symbols once, in training, so that the list does not travel with every request.
 - **The numbers with the tokenizer of the Claude models**, and with long programs. All programs here are small.
-- **Ordinary programs written in Ψ-LEX.** The second table is an estimate from stand-in signs.
+- **The twenty test programs written in Ψ-LEX.** The second table is an estimate from stand-in signs.

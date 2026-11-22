@@ -2,7 +2,7 @@
 
 *Ψ-LEX is written Psi-LEX in plain letters where a symbol cannot go, as in the name of this repository. Say it “sigh-lex”.*
 
-Data-science programs written in symbols, with exactly what they print and draw.
+Programs written in symbols, with exactly what they print and draw. The 17 examples here work on data: tables, charts and simple models. Ψ-LEX itself is not for one kind of program. A symbol stands for one block of work, and what it is used for is up to whoever writes the program.
 
 Each example is a program in symbols (`program.sym`) next to what it produced (`output.txt`, and its charts). Every program was run, and the output is what came out. This repository shows the programs and their results; the program that runs the symbols is not part of it.
 
@@ -14,9 +14,9 @@ Each example is a program in symbols (`program.sym`) next to what it produced (`
 - **A symbol means one thing.** Once an AI has learned the symbols, each one carries its meaning exactly, so there is less to get wrong. This is the bet of Ψ-LEX. It has not been measured yet.
 - **A symbol can stand for a whole block of work.** Where a program is made of standard blocks it becomes much shorter (see [Tokens](#tokens)). Where every line is new logic it does not, and it can even cost a little more. More blocks, and bigger blocks, are the way to shorten more programs.
 - **The machinery stays out of sight.** The plan is that the blocks, the engine and the translator all live in a data centre. An AI never reads their code: it writes symbols, sends them, and the answer comes back.
-- **Data science first, then ordinary programs.** Ordinary programs need loops, choices and functions in symbols as well, with the same blocks doing the standard work.
+- **One set of symbols, for any program.** Python is one language, and what you get depends on how you use it; it is the same with the symbols. No symbol is only for one kind of program, and the examples here happen to work on data. Python's own words (loops, choices, functions) have no symbols yet; one will be made when it is needed.
 
-Not shown yet: that symbols make an AI write fewer wrong programs, the data-centre arrangement (today the engine runs in a notebook), and ordinary programs (this repository has data science only). [TOKENS.md](TOKENS.md) says what is measured and what is not.
+Not shown yet: that symbols make an AI write fewer wrong programs, the data-centre arrangement (today the engine runs in a notebook), and programs with loops, choices and functions of their own (the 17 examples have none). [TOKENS.md](TOKENS.md) says what is measured and what is not.
 
 ## One program
 
@@ -99,13 +99,13 @@ A symbol is followed by its values, separated by commas: names made earlier, num
 
 An AI pays for every token it writes. The same work in ordinary Python and in Ψ-LEX, counted with a public tokenizer (the numbers are approximate; two other tokenizers agree within about 5 percent):
 
-| Kind of program | Programs | Ordinary Python | Ψ-LEX | Ψ-LEX as a share of ordinary |
+| What the blocks stand for | Programs | Ordinary Python | Ψ-LEX | Ψ-LEX as a share of ordinary |
 |---|---|---|---|---|
-| Data science, as in this repository | 16 | 3,044 tokens | 872 tokens | 29% |
-| Ordinary programs where standard blocks fit (estimate) | 18 | 3,202 | 2,100 to 2,300 | 66% to 71% |
-| Ordinary programs of new logic (estimate) | 2 | 675 | 650 to 740 | 96% to 110% |
+| Almost every line is a block: the programs in this repository | 16 | 3,044 tokens | 872 tokens | 29% |
+| Test programs where standard blocks fit (estimate) | 18 | 3,202 | 2,100 to 2,300 | 66% to 71% |
+| Test programs where every line is new logic (estimate) | 2 | 675 | 650 to 740 | 96% to 110% |
 
-The first row is measured, and it is the best case: the symbols were made for these programs. The other two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. Every program, the ordinary versions and the method are in [TOKENS.md](TOKENS.md).
+The first row is measured, and it is the best case: these programs were written to show the symbols, and almost every line is a block. The other two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. Every program, the ordinary versions and the method are in [TOKENS.md](TOKENS.md).
 
 ## The symbols
 
