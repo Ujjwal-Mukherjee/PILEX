@@ -103,11 +103,12 @@ An AI pays for every token it writes. The same work in ordinary Python and in Ψ
 
 | What the blocks stand for | Programs | Ordinary Python | Ψ-LEX | Ψ-LEX as a share of ordinary |
 |---|---|---|---|---|
-| Almost every line is a block: the programs in this repository | 16 | 3,044 tokens | 872 tokens | 29% |
+| Almost every line is a block: examples 01 to 16 | 16 | 3,044 tokens | 872 tokens | 29% |
+| A mix, from mostly logic to mostly blocks: examples 18 to 22 | 5 | 6,408 | 2,535 | 40% |
 | Test programs where standard blocks fit (estimate) | 18 | 3,202 | 2,100 to 2,300 | 66% to 71% |
 | Test programs where every line is new logic (estimate) | 2 | 675 | 650 to 740 | 96% to 110% |
 
-The first row is measured, and it is the best case: these programs were written to show the symbols, and almost every line is a block. The other two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. Every program, the ordinary versions and the method are in [TOKENS.md](TOKENS.md). Examples 18 to 24 are not counted in these tables.
+The first row is measured, and it is the best case: these programs were written to show the symbols, and almost every line is a block. The second row is measured too, and it is a mix. The job engine (example 22) comes out at 19% of its ordinary size and the task manager (example 18) at 92%, because most of the task manager is its own logic. The blocks were found by taking programs apart, these two among them, so this row is not an average over programs. The last two rows are estimates from test programs that are not in this repository, counted with stand-in signs. Where every line is new logic there is little to shorten, and rare signs can cost more than the words they replace. The programs, ordinary versions and method of the first row, and the counts of the second, are in [TOKENS.md](TOKENS.md). The ordinary versions of examples 18 to 22 are not shown. Examples 23 and 24 are not counted: no ordinary version of them was written.
 
 ## The symbols
 

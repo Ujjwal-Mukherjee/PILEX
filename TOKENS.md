@@ -1,6 +1,6 @@
 # Tokens: ordinary Python and Ψ-LEX
 
-Made 2026-11-21. Draft 1. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
+Made 2026-11-21; the section on examples 18 to 22 was added on 2026-11-22. Draft 2. The numbers are approximate: they are counted with public tokenizers, not with the tokenizer of the Claude models, which is not available here.
 
 ## What was counted
 
@@ -72,6 +72,27 @@ The blocks have no symbols yet, so each block line was turned into a stand-in si
 | Signs for the blocks, 2 tokens each, and signs for Python's own words | 2,281 (71%) | 740 (110%) |
 
 Two things to read from this. Where standard blocks fit, Ψ-LEX is about a third shorter. Where every line is new logic, it is not shorter, and with signs for Python's own words it comes out about a tenth longer: a rare sign costs more than the one-token word it replaces. Signs that cost one token each would avoid that. This was counted on small programs written by me, chosen because blocks fit them, so it shows what the blocks can give when they fit, not an average over all programs.
+
+## Examples 18 to 22, measured as they came out
+
+The estimate above was made before there were real programs to count. Examples 18 to 22 are real programs, and each has an ordinary Python program that does the same work: the task manager has its own, the job engine (22) has the program it was made from (401 lines), and the to-do list, the price checker and the mail queue have ones written by hand. The ordinary programs are not in this repository; only how the programs are written in symbols, and what they printed, is shown. The whole files were counted as they are with `o200k` and `cl100k`: there are no comments in any of them, and the docstrings and blank lines stay in.
+
+| # | Program | Lines (blank ones too): ordinary > Ψ-LEX | Tokens: ordinary | Tokens: Ψ-LEX | Ψ-LEX as a share of ordinary | Ordinary / Ψ-LEX |
+|---|---|---|---|---|---|---|
+| 18 | Task manager | 149 > 134 | 1,032 | 945 | 92% | 1.09x |
+| 19 | To-do list | 83 > 37 | 674 | 309 | 46% | 2.18x |
+| 20 | Price checker | 83 > 55 | 582 | 411 | 71% | 1.42x |
+| 21 | Mail queue | 146 > 34 | 1,160 | 318 | 27% | 3.65x |
+| 22 | Job engine | 401 > 70 | 2,960 | 552 | 19% | 5.36x |
+| | **Examples 18 to 22** | **862 > 330** | **6,408** | **2,535** | **40%** | **2.53x** |
+
+The table is in `o200k`. With `cl100k` the ratios are 1.09, 2.19, 1.40, 3.62, 5.35 and 2.52 times. Taking the docstrings and the blank lines out of both versions changes little: 1.11 times for the task manager, 2.17 for the to-do list, 1.42 for the price checker, 3.65 for the mail queue, 5.24 for the job engine and 2.59 for all five.
+
+What the numbers say:
+
+- **The saving follows how much of the program the blocks stand for.** The task manager is mostly its own logic: the menu, what a task is, what is printed. The signs make it only 9% shorter in tokens, 1.09 times. The job engine is mostly blocks, and it comes out 5.4 times shorter. The other three lie between.
+- **These are not an average over programs.** The blocks were found by taking programs apart: eight of them from the job engine (22) and some from the task manager (18). A program that blocks were taken from is the best case for those blocks, and even so the task manager shrinks by only 9%. Examples 19 to 21 were written afterwards, with blocks that already existed, to see whether the blocks serve other programs too (the mail queue uses the same job-engine blocks as example 22). They show reuse; they are not an average either.
+- **Not counted:** examples 23 and 24, because no ordinary version of them was written, and, as before, whether symbols make an AI write fewer mistakes.
 
 ## What stays out of the AI's sight
 
